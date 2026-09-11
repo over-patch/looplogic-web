@@ -1,7 +1,6 @@
 const dialog = document.querySelector<HTMLDialogElement>('.image-dialog');
 if (dialog && typeof dialog.showModal === 'function') {
  const image = dialog.querySelector<HTMLImageElement>('img')!;
- const caption = dialog.querySelector<HTMLElement>('.image-caption')!;
  let opener: HTMLAnchorElement | null = null;
  document.querySelectorAll<HTMLAnchorElement>('[data-screenshot]').forEach(link => {
   link.addEventListener('click', event => {
@@ -10,7 +9,6 @@ if (dialog && typeof dialog.showModal === 'function') {
    opener = link;
    image.src = link.href;
    image.alt = link.querySelector('img')?.alt ?? '';
-   caption.textContent = image.alt;
    dialog.showModal();
    document.documentElement.classList.add('image-open');
   });

@@ -9,11 +9,11 @@ const { lang = 'ja' } = Astro.props;
 const ja = lang === 'ja';
 const c = ja ? {
  title: 'Loop Logic — スリザーリンク × アドベンチャー', description: '数字を手がかりに、ひとつのループを完成させるロジックパズル。30,000問以上のステージとアドベンチャーモード。スマートフォン・タブレットで無料ダウンロード。',
- nav: ['遊び方', 'アドベンチャー', 'ダウンロード'], eyebrow: '数字と線のロジックパズル', headline: ['数字を手がかりに、','ひとつの輪を。'], intro: '線がつながる。ひらめきが、止まらない。広告なしで楽しむロジックパズル。', free: '無料でダウンロード・アプリ内購入あり', ios: 'App Storeからダウンロード', android: 'Google Playで手に入れよう', diagram: 'スリザーリンクのルール説明図', diagramNote: '数字の周りに、その数だけ線を。', rulesTitle: ['ルールはシンプル。','答えまでの道は、奥深い。'], rulesIntro: '使うのは数字と、あなたの論理。ひとつずつ確かな線を見つけていきましょう。', rules: [['数字が、手がかり。','マスの数字は、その周りを通る線の本数。「3」なら、4辺のうち3辺に線を引きます。'],['線を、つないで。','点と点を線で結びます。線を枝分かれさせたり、交差させたりはできません。'],['ひとつの輪に。','すべての数字を満たす、途切れないひとつのループができたらクリア。']],
+ nav: ['遊び方', 'アドベンチャー', 'ダウンロード'], eyebrow: '数字と線のロジックパズル', headline: ['数字を手がかりに、','ひとつの輪を。'], intro: '線がつながる。ひらめきが、止まらない。広告なしで楽しむロジックパズル。', ios: 'App Storeからダウンロード', android: 'Google Playで手に入れよう', diagram: 'スリザーリンクのルール説明図', diagramNote: '数字の周りに、その数だけ線を。', rulesTitle: ['ルールはシンプル。','答えまでの道は、奥深い。'], rulesIntro: '使うのは数字と、あなたの論理。ひとつずつ確かな線を見つけていきましょう。', rules: [['数字が、手がかり。','マスの数字は、その周りを通る線の本数。「3」なら、4辺のうち3辺に線を引きます。'],['線を、つないで。','点と点を線で結びます。線を枝分かれさせたり、交差させたりはできません。'],['ひとつの輪に。','すべての数字を満たす、途切れないひとつのループができたらクリア。']],
  proof: [['広告なし','考えることに集中'],['3段階','自分に合う難易度'],['30,000+','収録パズル']], modesTitle: ['じっくり解く日も。','挑み続けたい日も。'], standard: '自分のペースで、ひとつずつ。', standardText: 'サイズと難易度を選んで、ステージを攻略。小さな盤面から大きな難問まで、今の気分に合った一問が待っています。', standardTags: ['4×4〜16×20の盤面','3段階の難易度'], adventure: '解く力に、戦略を重ねる。', adventureText: 'ステージごとにバフを選び、自分だけの攻略を組み立てる。デイリーチャレンジやタイムランキングで、もう一歩先の挑戦へ。', adventureTags: ['32種類のバフ','デイリーチャレンジ'], galleryLabel: 'アプリのプレイ画面（現在のストア掲載画像）', endTitle: ['次の一手も、','次の選択も、あなた次第。'], endText: 'ひらめきと戦略で、次のステージへ。Loop Logicを無料で始めよう。', privacy: 'プライバシーポリシー', terms: '利用規約', skip: '本文へスキップ',
 } : {
  title: 'Loop Logic — Slitherlink meets Adventure', description: 'Connect the clues into one continuous loop. Explore over 30,000 logic puzzles and Adventure Mode. Download Loop Logic for your phone or tablet for free, with in-app purchases.',
- nav: ['How to play', 'Adventure', 'Download'], eyebrow: 'A LOGIC PUZZLE OF NUMBERS AND LINES', headline: ['Follow the numbers.','Find the loop.'], intro: 'Connect the lines. Find your next moment of insight. An ad-free logic puzzle.', free: 'Free to download · In-app purchases', ios: 'Download on the App Store', android: 'Get it on Google Play', diagram: 'Slitherlink rules diagram', diagramNote: 'Each number tells you how many edges to draw.', rulesTitle: ['Simple rules.','Deeply satisfying puzzles.'], rulesIntro: 'Just numbers, lines, and your logic. Find your way forward, one certain move at a time.', rules: [['Follow the numbers.','Each number tells you how many of the four edges around its cell need a line. A 3 needs three edges.'],['Connect the dots.','Draw lines between neighboring dots. Lines cannot branch or cross.'],['Close one loop.','Satisfy every number and form a single continuous loop to solve the puzzle.']],
+ nav: ['How to play', 'Adventure', 'Download'], eyebrow: 'A LOGIC PUZZLE OF NUMBERS AND LINES', headline: ['Follow the numbers.','Find the loop.'], intro: 'Connect the lines. Find your next moment of insight. An ad-free logic puzzle.', ios: 'Download on the App Store', android: 'Get it on Google Play', diagram: 'Slitherlink rules diagram', diagramNote: 'Each number tells you how many edges to draw.', rulesTitle: ['Simple rules.','Deeply satisfying puzzles.'], rulesIntro: 'Just numbers, lines, and your logic. Find your way forward, one certain move at a time.', rules: [['Follow the numbers.','Each number tells you how many of the four edges around its cell need a line. A 3 needs three edges.'],['Connect the dots.','Draw lines between neighboring dots. Lines cannot branch or cross.'],['Close one loop.','Satisfy every number and form a single continuous loop to solve the puzzle.']],
  proof: [['No ads','Room to think'],['3 levels','Find your difficulty'],['30,000+','Puzzles to explore']], modesTitle: ['Settle into a puzzle.','Or rise to a challenge.'], standard: 'One puzzle at a time. At your pace.', standardText: 'Choose a board size and difficulty, then work your way through the stages. From compact grids to sprawling challenges, find a puzzle for your mood.', standardTags: ['4×4 to 16×20 grids','3 difficulty levels'], adventure: 'Add strategy to your logic.', adventureText: 'Choose buffs between stages and shape your own approach. Take on the daily challenge and compete for times on the rankings.', adventureTags: ['32 buffs','Daily challenge'], galleryLabel: 'Gameplay shown in current Japanese store images', endTitle: ['Your next move.','Your next adventure.'], endText: 'Bring your logic. Find your strategy. Download Loop Logic for free.', privacy: 'Privacy policy', terms: 'Terms of use', skip: 'Skip to content',
 };
 const canonical = `https://looplogic.overpatch.dev${ja ? '/ja/' : '/'}`;
@@ -38,7 +38,6 @@ const legal = 'https://over-patch.github.io/overpatch-legal/looplogic/';
   <main id="main">
    <section class="hero wrap">
     <div class="hero-copy"><p class="eyebrow">{c.eyebrow}</p><h1>{c.headline[0]}<br /><span>{c.headline[1]}</span></h1><p class="intro">{c.intro}</p>
-     <StoreLinks ja={ja} placement="hero" />
      <a class="explore-link" href="#try-puzzle" data-start-puzzle>{ja ? 'ブラウザで、一問遊んでみる' : 'Try a puzzle in your browser'}<span aria-hidden="true"> ↗</span></a>
 
     </div>
@@ -56,9 +55,8 @@ const legal = 'https://over-patch.github.io/overpatch-legal/looplogic/';
    <section id="download" class="download section wrap"><img src="/images/icon.png" width="76" height="76" alt="" loading="lazy" /><p class="eyebrow">LOOP LOGIC</p><h2>{c.endTitle[0]}<br />{c.endTitle[1]}</h2><p>{c.endText}</p><StoreLinks ja={ja} placement="footer" /></section>
   </main>
   <dialog class="image-dialog" aria-label={ja ? 'ゲーム画面を拡大' : 'Enlarged game screenshot'}>
-   <form method="dialog"><button class="image-close" autofocus>{ja ? '閉じる' : 'Close'} <span aria-hidden="true">×</span></button></form>
+   <form method="dialog"><button class="image-close" aria-label={ja ? '閉じる' : 'Close'} autofocus><span aria-hidden="true">×</span></button></form>
    <img alt="" width="1242" height="2688" />
-   <p class="image-caption"></p>
   </dialog>
   <script>
    import '../scripts/screenshots';

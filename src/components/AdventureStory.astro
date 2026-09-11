@@ -1,6 +1,5 @@
 ---
 import AdventureMedia from './AdventureMedia.astro';
-import StoreLinks from './StoreLinks.astro';
 const { ja } = Astro.props;
 const buffs = ja ? [
  ['正解線スタート','最初の一手に、足がかりを。','開始時に一部の正解線を配置。確かな線を起点に、周りのマスを読み解いていく。','line'],
@@ -27,8 +26,6 @@ const buffs = ja ? [
    </svg></div>
    <div class="buff-copy"><p class="buff-name">{name}</p><h4>{title}</h4><p>{description}</p></div>
   </article>)}</div>
-  <p class="illustration-note">{ja ? 'バフの効果を示す説明図です。実際のゲーム画面・出現する選択肢の再現ではありません。' : 'Diagrams illustrate buff effects, not the game interface or a specific selection of available buffs.'}</p>
   <div class="replay"><div><span class="eyebrow">DAILY CHALLENGE</span><h3>{ja ? '今日も、ひとつ先の挑戦へ。' : 'A fresh reason to return.'}</h3></div><p>{ja ? '毎日更新されるデイリーチャレンジ。タイムランキングで、世界中のプレイヤーと記録を競う楽しさも。' : 'Take on a daily challenge and compete for times with players around the world on the rankings.'}</p></div>
-  <div class="adventure-download"><StoreLinks ja={ja} placement="adventure" /></div>
  </div>
 </section>

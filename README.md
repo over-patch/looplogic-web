@@ -32,6 +32,6 @@ Legal links point to existing public Loop Logic policies. No new legal text is i
 - Shared StoreLinks uses official black store badges with equal visual height; copy applies to phones and tablets. Google Play uses the official English badge on both locales because the legacy Japanese asset endpoints are unavailable. Apple badges are localized.
 - Badge sources: https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg ; https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp ; https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png . Artwork is preserved without modification.
 - The hero's direct practice link starts the optional puzzle. The existing pause, reset, hints and two puzzles are preserved.
-- Adventure introduction consolidates the repeated bridge and journey explanation. Store links also appear after the Adventure section.
+- Adventure introduction consolidates the repeated bridge and journey explanation. Store badges appear once in the final download section; the sticky header provides access from anywhere on the page.
 - Store screenshots open a native dialog, support Escape, restore focus and remain ordinary image links without JavaScript. Mobile screenshots use horizontal scroll snap.
 - Global and Adventure styles are consolidated; practice edge targets have a 44px minimum short side. The main page was checked at 320, 390, 768 and 1280px widths across both locales.
