@@ -1,0 +1,8 @@
+---
+interface Props { src: string; alt: string; ja: boolean; }
+const { src, alt, ja } = Astro.props;
+---
+<a class="screenshot-link" href={src} data-screenshot aria-label={`${alt} — ${ja ? '拡大する' : 'Enlarge'}`}>
+ <img src={src} width="1242" height="2688" loading="lazy" alt={alt} />
+ <span class="screenshot-enlarge" aria-hidden="true">{ja ? '拡大する' : 'Enlarge'} ↗</span>
+</a>

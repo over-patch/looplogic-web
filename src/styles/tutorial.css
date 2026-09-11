@@ -1,0 +1,52 @@
+.tutorial{padding:26px;min-width:0;background:linear-gradient(150deg,#1b2034,#101420 70%);border-color:#a0abcc26;box-shadow:0 28px 80px #0004,inset 0 1px #ffffff09}
+.tutorial .board-top{padding-bottom:18px;border-color:#ffffff0d;letter-spacing:.06em}
+.tutorial [data-score]{font:12px ui-monospace,monospace;color:#a99cdb;background:#a997e811;padding:6px 9px;border-radius:6px;min-width:56px;text-align:center}
+.tutorial-board{position:relative;width:100%;aspect-ratio:1;max-width:360px;margin:10px auto 17px;isolation:isolate;border-radius:20px;background:radial-gradient(ellipse at center,#232b444d,transparent 75%)}
+.tutorial-clue{position:absolute;transform:translate(-50%,-50%);font:700 29px ui-monospace,monospace;color:#d9ddec;line-height:1;pointer-events:none;display:grid;place-items:center;width:44px;height:44px;transition:color .2s}
+.tutorial-clue.is-counting{color:#f1eaff}
+.tutorial-clue.is-satisfied{color:#8ed7bf}
+.tutorial-clue.is-over{color:#ffabb2}
+.tutorial-clue.is-over::after{content:'!';position:absolute;right:-3px;top:-3px;width:15px;height:15px;display:grid;place-items:center;border-radius:50%;background:#f6a1aa;color:#301723;font:700 11px system-ui}
+.tutorial-dot{position:absolute;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:#a5aec6;box-shadow:0 0 0 3px #151a2b;pointer-events:none;z-index:3;transition:background .2s}
+.tutorial-edge{position:absolute;transform:translate(-50%,-50%);background:transparent;border:0;padding:0;cursor:pointer;border-radius:7px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.tutorial-edge.horizontal{width:19%;height:11%}.tutorial-edge.vertical{height:19%;width:11%}
+.tutorial-edge .edge-mark{position:absolute;display:block;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:4px;pointer-events:none;transition:background .2s,box-shadow .2s}
+.tutorial-edge.horizontal .edge-mark{width:132%;height:1px;background:repeating-linear-gradient(90deg,#5e688c55 0 3px,transparent 3px 8px)}
+.tutorial-edge.vertical .edge-mark{height:132%;width:1px;background:repeating-linear-gradient(0deg,#5e688c55 0 3px,transparent 3px 8px)}
+.tutorial-edge:disabled{cursor:default}
+.tutorial-edge[data-state=line] .edge-mark{background:#c0b4f5;box-shadow:0 0 10px #af94ff20}
+.tutorial-edge.horizontal[data-state=line] .edge-mark{height:3px}.tutorial-edge.vertical[data-state=line] .edge-mark{width:3px}
+.tutorial-edge.is-fixed[data-state=line] .edge-mark{background:#abb5cf;box-shadow:none}
+.tutorial-edge.is-target{background:#b7afff15;outline:1px solid #c2b7fa60}
+.tutorial-edge.is-target .edge-mark{background:#e2d7ff;box-shadow:0 0 10px #b3a0ff60}
+.tutorial-edge.is-error[data-state=line] .edge-mark{background:#fa9aa6;box-shadow:0 0 8px #f6798924}
+.tutorial-edge:focus-visible{outline:2px solid #96e0d3;outline-offset:2px;z-index:4}
+@media(hover:hover){.tutorial-edge:not(:disabled):hover{background:#b7afff12}.tutorial-edge:not(:disabled):hover .edge-mark{box-shadow:0 0 9px #c6b3ff35}}
+.tutorial-instructions{min-height:72px;padding:0 2px}
+.tutorial-progress{font-size:17px!important;font-weight:550;color:#e4dffa!important;letter-spacing:0;margin:0 0 7px!important;line-height:1.5}
+.tutorial.has-mistake .tutorial-progress{color:#ffb7bd!important}
+.tutorial-instructions>p:last-child{font-size:14px;line-height:1.7;color:#a6afc3;margin:0}
+.tutorial-actions{display:flex;gap:12px;justify-content:space-between;margin:19px 0 8px}.tutorial-actions[hidden]{display:none}
+.tutorial-actions button{font:inherit;font-size:14px;min-height:44px;padding:10px 20px;border-radius:10px;cursor:pointer;background:transparent;border:1px solid #ffffff20;color:#b9c0d6;transition:background .2s}
+.tutorial-actions [data-next]{background:#e3ddfa;color:#252039;border:0;min-width:130px;box-shadow:inset 0 1px #fff8}
+.tutorial-actions button:disabled{opacity:.4;cursor:default}
+.tutorial-actions button:focus-visible{outline:2px solid #8ae6de;outline-offset:3px}
+.tutorial.is-complete .tutorial-edge[data-state=line] .edge-mark{background:#8ee0cd;box-shadow:0 0 10px #8ee0cd30}
+.tutorial.is-complete .tutorial-dot{background:#b1eadb}
+.tutorial.is-complete [data-score]{color:#a6e6ce;background:#70cfac12}
+.tutorial .diagram-label{font-size:12px;color:#848ea6;line-height:1.6;margin-top:16px}
+.tutorial-edge.is-new-line.horizontal .edge-mark{transform-origin:left center;animation:draw-horizontal .45s ease-out both}
+.tutorial-edge.is-new-line.vertical .edge-mark{transform-origin:center top;animation:draw-vertical .45s ease-out both}
+@keyframes draw-horizontal{from{transform:translate(-50%,-50%) scaleX(0)}to{transform:translate(-50%,-50%) scaleX(1)}}
+@keyframes draw-vertical{from{transform:translate(-50%,-50%) scaleY(0)}to{transform:translate(-50%,-50%) scaleY(1)}}
+@media(max-width:380px){.tutorial{padding:18px}.tutorial-clue{font-size:25px;width:38px;height:38px}.tutorial-instructions{min-height:82px}}
+@media(prefers-reduced-motion:reduce){.tutorial-clue,.tutorial-dot,.tutorial-edge .edge-mark,.tutorial-actions button{transition:none}.tutorial-edge.is-new-line .edge-mark{animation:none}}
+.puzzle-confetti{position:absolute;inset:0 0 -50px;z-index:8;overflow:clip;pointer-events:none}
+.puzzle-confetti i{position:absolute;border-radius:1px;backface-visibility:visible;will-change:transform,opacity}
+.confetti-burst{position:absolute;width:18px;height:18px;margin:-9px;border:2px solid #ffe5a7;border-radius:50%;animation:confetti-pop 350ms ease-out both}
+@keyframes confetti-pop{from{opacity:.9;transform:scale(.3)}to{opacity:0;transform:scale(3.5)}}
+@media(prefers-reduced-motion:reduce){.puzzle-confetti{display:none}.confetti-burst{animation:none}}
+
+/* Keep the complete demo and its actions within a laptop viewport. */
+.tutorial{padding:20px 24px}.tutorial-board{max-width:288px;margin:8px auto 12px}.tutorial-instructions{min-height:72px}.tutorial-actions{margin:12px 0 0}.tutorial .board-top{padding-bottom:12px;letter-spacing:0}.tutorial-progress{font-size:16px!important}.tutorial-edge.horizontal{height:44px}.tutorial-edge.vertical{width:44px}
+@media(max-width:720px){.tutorial{padding:18px}.tutorial-board{max-width:320px}.tutorial-clue{font-size:27px}.tutorial-actions button{padding-inline:15px}.tutorial-instructions{min-height:72px}}

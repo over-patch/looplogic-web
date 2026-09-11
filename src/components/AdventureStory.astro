@@ -1,0 +1,34 @@
+---
+import AdventureMedia from './AdventureMedia.astro';
+import StoreLinks from './StoreLinks.astro';
+const { ja } = Astro.props;
+const buffs = ja ? [
+ ['正解線スタート','最初の一手に、足がかりを。','開始時に一部の正解線を配置。確かな線を起点に、周りのマスを読み解いていく。','line'],
+ ['追加ヒントスタート','数字から、答えを探したい。','開始時に隠れた数字のヒントを追加。手がかりを増やして、自分の論理で線をつなぐ。','clue'],
+ ['ミス防止シールド','間違いに、早く気づきたい。','誤って引いた線を、一定時間後に×へ変換。回数制限のあるサポートで攻略を助ける。','shield'],
+] : [
+ ['Correct Lines Start','A foothold for your first move.','Begin with some correct lines already placed. Use those certain edges to reason through neighboring cells.','line'],
+ ['Extra Hint Start','More clues to reason from.','Reveal additional hidden number clues at the start. Connect the lines using your own logic.','clue'],
+ ['Miss Prevention Shield','Catch a wrong turn sooner.','An incorrect line becomes a cross after a delay. This support has a limited number of uses.','shield'],
+];
+---
+<section id="adventure" class="adventure-story section">
+ <div class="wrap">
+  <div class="adventure-intro-layout"><div class="story-heading"><p class="eyebrow">ADVENTURE MODE</p><h2>{ja ? '解くだけじゃない。' : 'More than solving.'}<br/><span>{ja ? '選ぶたび、攻略が変わる。' : 'Every choice shapes your approach.'}</span></h2><p>{ja ? 'ループを解く。バフを選ぶ。次のステージへ。32種類の特殊効果との出会いが、いつものパズルに戦略を加えます。' : 'Solve a loop. Choose a buff. Take on the next stage. Discover 32 special effects that add a little strategy to every puzzle.'}</p></div>
+  <AdventureMedia ja={ja} /></div>
+  <div class="buff-heading"><p class="eyebrow">CHOOSE YOUR APPROACH</p><h3>{ja ? '次の一問、どんな助けを選ぶ？' : 'What would help you solve the next puzzle?'}</h3></div>
+  <div class="buff-examples">{buffs.map(([name,title,description,type],i)=><article class={`buff-example ${type}`}>
+   <div class="buff-visual" aria-hidden="true"><svg viewBox="0 0 200 120">
+    {[35,85,135,185].map(x=>[15,65,115].map(y=><circle cx={x-10} cy={y-5} r="2" fill="#8791b3"/>))}
+    <text x="50" y="40">2</text><text x="100" y="90">1</text><text x="150" y="40">3</text>
+    {type==='line'&&<path class="buff-line" d="M25 60V10H75" />}
+    {type==='clue'&&<text class="buff-clue" x="100" y="40">2</text>}
+    {type==='shield'&&<><path class="wrong-line" d="M125 60H175"/><path class="correct-cross" d="M144 54L156 66M156 54L144 66"/></>}
+   </svg></div>
+   <div class="buff-copy"><p class="buff-name">{name}</p><h4>{title}</h4><p>{description}</p></div>
+  </article>)}</div>
+  <p class="illustration-note">{ja ? 'バフの効果を示す説明図です。実際のゲーム画面・出現する選択肢の再現ではありません。' : 'Diagrams illustrate buff effects, not the game interface or a specific selection of available buffs.'}</p>
+  <div class="replay"><div><span class="eyebrow">DAILY CHALLENGE</span><h3>{ja ? '今日も、ひとつ先の挑戦へ。' : 'A fresh reason to return.'}</h3></div><p>{ja ? '毎日更新されるデイリーチャレンジ。タイムランキングで、世界中のプレイヤーと記録を競う楽しさも。' : 'Take on a daily challenge and compete for times with players around the world on the rankings.'}</p></div>
+  <div class="adventure-download"><StoreLinks ja={ja} placement="adventure" /></div>
+ </div>
+</section>

@@ -1,0 +1,23 @@
+---
+import { demo } from '../data/loop-demo';
+const { clues } = demo;
+import '../styles/tutorial.css';
+const { ja } = Astro.props;
+const edges = [];
+for(let r=0;r<4;r++) for(let c=0;c<3;c++) edges.push({key:`h-${r}-${c}`,r,c,h:true});
+for(let r=0;r<3;r++) for(let c=0;c<4;c++) edges.push({key:`v-${r}-${c}`,r,c,h:false});
+---
+<figure id="try-puzzle" tabindex="-1" aria-label={ja ? "一問、遊んでみる" : "Try a puzzle"} class="first-loop tutorial" data-tutorial data-lang={ja?'ja':'en'}>
+ <div class="board-top"><span>{ja ? '数字から、ひとつの輪へ。' : 'From numbers to one loop.'}</span><span data-score hidden aria-label={ja?"満たした数字の数":"Satisfied clue count"}></span></div>
+ <div class="tutorial-board" role="group" aria-label={ja?'線をつないで輪をつくる練習盤面':'Practice puzzle: connect lines into one loop'}>
+  {clues.map((row,r)=>row.map((n,c)=><span class="tutorial-clue" data-clue={`${r}-${c}`} style={`left:${25+c*25}%;top:${25+r*25}%`}>{n??''}</span>))}
+  {[0,1,2,3].map(r=>[0,1,2,3].map(c=><span class="tutorial-dot" style={`left:${12.5+c*25}%;top:${12.5+r*25}%`} aria-hidden="true"/>))}
+  {edges.map(({key,r,c,h})=><button disabled type="button" class:list={['tutorial-edge',h?'horizontal':'vertical']} data-edge={key} data-state="empty" style={`left:${12.5+c*25+(h?12.5:0)}%;top:${12.5+r*25+(h?0:12.5)}%`} aria-label={ja?`${h?'横':'縦'}の辺、${r+1}行${c+1}列`:`${h?'Horizontal':'Vertical'} edge, row ${r+1}, column ${c+1}`}><span class="edge-mark" aria-hidden="true"/></button>)}
+ </div>
+ <div class="tutorial-instructions"><p class="tutorial-progress" data-progress>{ja?'まずは、見てみよう。':'First, watch a loop come together.'}</p><p data-instruction aria-live="polite">{ja?'数字と同じ本数、線を引く。ひとつの輪に。':'Match each number with lines. Make one loop.'}</p></div>
+ <div class="tutorial-actions" hidden><button type="button" data-reset>{ja?'一時停止':'Pause'}</button><button type="button" data-next>{ja?'挑戦へスキップ':'Skip to challenge'}</button></div>
+ <noscript><p>{ja?'盤面を操作するにはJavaScriptを有効にしてください。基本ルールはこの下で読めます。':'Enable JavaScript to try the board. You can read the rules below without it.'}</p></noscript>
+</figure>
+<script>
+ import '../scripts/loop-demo';
+</script>

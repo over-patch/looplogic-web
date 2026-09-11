@@ -1,0 +1,16 @@
+---
+interface Props { ja: boolean; placement: string; }
+const { ja, placement } = Astro.props;
+const locale = ja ? 'ja' : 'en';
+---
+<div class="store-group">
+ <div class="store-links">
+  <a class="store-badge apple-badge" href={`https://apps.apple.com/${ja ? 'jp' : 'us'}/app/loop-logic/id6758883537`} data-store="apple" data-placement={placement}>
+   <img src={`/images/badges/app-store-${locale}.svg`} width="120" height="40" alt={ja ? 'App Storeからダウンロード' : 'Download on the App Store'} />
+  </a>
+  <a class="store-badge google-badge" href="https://play.google.com/store/apps/details?id=ch.overpatch.looplogic" data-store="google" data-placement={placement}>
+   <img src="/images/badges/google-play-en.png" width="646" height="250" alt={ja ? 'Google Playで手に入れよう' : 'Get it on Google Play'} />
+  </a>
+ </div>
+ <p class="store-details">{ja ? 'スマートフォンでも、タブレットでも。' : 'On your phone. On your tablet.'}<span>{ja ? '無料ダウンロード · アプリ内購入あり' : 'Free to download · In-app purchases'}</span></p>
+</div>

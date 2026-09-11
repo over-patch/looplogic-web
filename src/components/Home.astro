@@ -1,21 +1,23 @@
 ---
 import '../styles/global.css';
+import '../styles/adventure.css';
+import AdventureStory from './AdventureStory.astro';
+import FirstLoop from './FirstLoop.astro';
+import StoreLinks from './StoreLinks.astro';
+import Screenshot from './Screenshot.astro';
 const { lang = 'ja' } = Astro.props;
 const ja = lang === 'ja';
 const c = ja ? {
- title: 'Loop Logic — 広告なしで楽しむスリザーリンク', description: '数字を手がかりに、ひとつのループを完成させるロジックパズル。30,000問以上のステージとアドベンチャーモード。iPhone・Androidで無料ダウンロード。',
- nav: ['遊び方', '2つのモード', 'ダウンロード'], eyebrow: 'ひらめきを、ひとつのループに。', headline: ['その一本が、','すべてをつなぐ。'], intro: '数字を読み、線をつなぐ。バラバラだった手がかりが、ひとつの答えになる。考える楽しさに没頭する、スリザーリンクパズル。', free: '無料でダウンロード・アプリ内購入あり', ios: 'iPhoneでダウンロード', android: 'Androidでダウンロード', diagram: 'スリザーリンクのルール説明図', diagramNote: '数字の周りに、その数だけ線を。', rulesTitle: ['ルールはシンプル。','答えまでの道は、奥深い。'], rulesIntro: '使うのは数字と、あなたの論理。ひとつずつ確かな線を見つけていきましょう。', rules: [['数字が、手がかり。','マスの数字は、その周りを通る線の本数。「3」なら、4辺のうち3辺に線を引きます。'],['線を、つないで。','点と点を線で結びます。線を枝分かれさせたり、交差させたりはできません。'],['ひとつの輪に。','すべての数字を満たす、途切れないひとつのループができたらクリア。']],
- proof: [['30,000+','収録パズル'],['3段階','難易度'],['広告なし','思考を止めない']], modesTitle: ['じっくり解く日も。','挑み続けたい日も。'], standard: '自分のペースで、ひとつずつ。', standardText: 'サイズと難易度を選んで、ステージを攻略。小さな盤面から大きな難問まで、今の気分に合った一問が待っています。', standardTags: ['4×4〜16×20の盤面','3段階の難易度'], adventure: '解く力に、戦略を重ねる。', adventureText: 'ステージごとにバフを選び、自分だけの攻略を組み立てる。デイリーチャレンジやタイムランキングで、もう一歩先の挑戦へ。', adventureTags: ['32種類のバフ','デイリーチャレンジ'], galleryLabel: 'アプリのプレイ画面（現在のストア掲載画像）', endTitle: ['次のひらめきは、','あなたの手の中に。'], endText: 'まずは一問。線がつながる気持ちよさを、Loop Logicで。', privacy: 'プライバシーポリシー', terms: '利用規約', related: '同じチームがつくる Owlaria', skip: '本文へスキップ',
+ title: 'Loop Logic — スリザーリンク × アドベンチャー', description: '数字を手がかりに、ひとつのループを完成させるロジックパズル。30,000問以上のステージとアドベンチャーモード。スマートフォン・タブレットで無料ダウンロード。',
+ nav: ['遊び方', 'アドベンチャー', 'ダウンロード'], eyebrow: '数字と線のロジックパズル', headline: ['数字を手がかりに、','ひとつの輪を。'], intro: '線がつながる。ひらめきが、止まらない。広告なしで楽しむロジックパズル。', free: '無料でダウンロード・アプリ内購入あり', ios: 'App Storeからダウンロード', android: 'Google Playで手に入れよう', diagram: 'スリザーリンクのルール説明図', diagramNote: '数字の周りに、その数だけ線を。', rulesTitle: ['ルールはシンプル。','答えまでの道は、奥深い。'], rulesIntro: '使うのは数字と、あなたの論理。ひとつずつ確かな線を見つけていきましょう。', rules: [['数字が、手がかり。','マスの数字は、その周りを通る線の本数。「3」なら、4辺のうち3辺に線を引きます。'],['線を、つないで。','点と点を線で結びます。線を枝分かれさせたり、交差させたりはできません。'],['ひとつの輪に。','すべての数字を満たす、途切れないひとつのループができたらクリア。']],
+ proof: [['広告なし','考えることに集中'],['3段階','自分に合う難易度'],['30,000+','収録パズル']], modesTitle: ['じっくり解く日も。','挑み続けたい日も。'], standard: '自分のペースで、ひとつずつ。', standardText: 'サイズと難易度を選んで、ステージを攻略。小さな盤面から大きな難問まで、今の気分に合った一問が待っています。', standardTags: ['4×4〜16×20の盤面','3段階の難易度'], adventure: '解く力に、戦略を重ねる。', adventureText: 'ステージごとにバフを選び、自分だけの攻略を組み立てる。デイリーチャレンジやタイムランキングで、もう一歩先の挑戦へ。', adventureTags: ['32種類のバフ','デイリーチャレンジ'], galleryLabel: 'アプリのプレイ画面（現在のストア掲載画像）', endTitle: ['次の一手も、','次の選択も、あなた次第。'], endText: 'ひらめきと戦略で、次のステージへ。Loop Logicを無料で始めよう。', privacy: 'プライバシーポリシー', terms: '利用規約', related: '同じチームがつくる Owlaria', skip: '本文へスキップ',
 } : {
- title: 'Loop Logic — Ad-free Slitherlink puzzles', description: 'Connect the clues into one continuous loop. Explore over 30,000 logic puzzles and Adventure Mode. Download Loop Logic for iPhone and Android for free, with in-app purchases.',
- nav: ['How to play', 'Two ways to play', 'Download'], eyebrow: 'A little logic. A satisfying loop.', headline: ['One more line.','It all connects.'], intro: 'Read the numbers. Connect the clues. Discover the moment when every piece falls into place, with a Slitherlink puzzle built for focused thinking.', free: 'Free to download · In-app purchases', ios: 'Download for iPhone', android: 'Download for Android', diagram: 'Slitherlink rules diagram', diagramNote: 'Each number tells you how many edges to draw.', rulesTitle: ['Simple rules.','Deeply satisfying puzzles.'], rulesIntro: 'Just numbers, lines, and your logic. Find your way forward, one certain move at a time.', rules: [['Follow the numbers.','Each number tells you how many of the four edges around its cell need a line. A 3 needs three edges.'],['Connect the dots.','Draw lines between neighboring dots. Lines cannot branch or cross.'],['Close one loop.','Satisfy every number and form a single continuous loop to solve the puzzle.']],
- proof: [['30,000+','Puzzles to explore'],['3 levels','Of difficulty'],['No ads','Keep your focus']], modesTitle: ['Settle into a puzzle.','Or rise to a challenge.'], standard: 'One puzzle at a time. At your pace.', standardText: 'Choose a board size and difficulty, then work your way through the stages. From compact grids to sprawling challenges, find a puzzle for your mood.', standardTags: ['4×4 to 16×20 grids','3 difficulty levels'], adventure: 'Add strategy to your logic.', adventureText: 'Choose buffs between stages and shape your own approach. Take on the daily challenge and compete for times on the rankings.', adventureTags: ['32 buffs','Daily challenge'], galleryLabel: 'Gameplay shown in current Japanese store images', endTitle: ['Your next breakthrough.','Right at your fingertips.'], endText: 'Start with one puzzle. Discover how good it feels when everything connects.', privacy: 'Privacy policy', terms: 'Terms of use', related: 'Also by our team: Owlaria', skip: 'Skip to content',
+ title: 'Loop Logic — Slitherlink meets Adventure', description: 'Connect the clues into one continuous loop. Explore over 30,000 logic puzzles and Adventure Mode. Download Loop Logic for your phone or tablet for free, with in-app purchases.',
+ nav: ['How to play', 'Adventure', 'Download'], eyebrow: 'A LOGIC PUZZLE OF NUMBERS AND LINES', headline: ['Follow the numbers.','Find the loop.'], intro: 'Connect the lines. Find your next moment of insight. An ad-free logic puzzle.', free: 'Free to download · In-app purchases', ios: 'Download on the App Store', android: 'Get it on Google Play', diagram: 'Slitherlink rules diagram', diagramNote: 'Each number tells you how many edges to draw.', rulesTitle: ['Simple rules.','Deeply satisfying puzzles.'], rulesIntro: 'Just numbers, lines, and your logic. Find your way forward, one certain move at a time.', rules: [['Follow the numbers.','Each number tells you how many of the four edges around its cell need a line. A 3 needs three edges.'],['Connect the dots.','Draw lines between neighboring dots. Lines cannot branch or cross.'],['Close one loop.','Satisfy every number and form a single continuous loop to solve the puzzle.']],
+ proof: [['No ads','Room to think'],['3 levels','Find your difficulty'],['30,000+','Puzzles to explore']], modesTitle: ['Settle into a puzzle.','Or rise to a challenge.'], standard: 'One puzzle at a time. At your pace.', standardText: 'Choose a board size and difficulty, then work your way through the stages. From compact grids to sprawling challenges, find a puzzle for your mood.', standardTags: ['4×4 to 16×20 grids','3 difficulty levels'], adventure: 'Add strategy to your logic.', adventureText: 'Choose buffs between stages and shape your own approach. Take on the daily challenge and compete for times on the rankings.', adventureTags: ['32 buffs','Daily challenge'], galleryLabel: 'Gameplay shown in current Japanese store images', endTitle: ['Your next move.','Your next adventure.'], endText: 'Bring your logic. Find your strategy. Download Loop Logic for free.', privacy: 'Privacy policy', terms: 'Terms of use', related: 'Also by our team: Owlaria', skip: 'Skip to content',
 };
-const apple = `https://apps.apple.com/${ja ? 'jp' : 'us'}/app/loop-logic/id6758883537`;
-const play = 'https://play.google.com/store/apps/details?id=ch.overpatch.looplogic';
 const canonical = `https://looplogic.overpatch.dev${ja ? '/ja/' : '/'}`;
 const legal = 'https://over-patch.github.io/overpatch-legal/looplogic/';
-const grid = [[2,1,2],[1,0,1],[2,1,2]];
 ---
 <!doctype html>
 <html lang={lang}>
@@ -30,36 +32,37 @@ const grid = [[2,1,2],[1,0,1],[2,1,2]];
   <a class="skip" href="#main">{c.skip}</a>
   <header class="header wrap">
    <a class="brand" href={ja ? '/ja/' : '/'} aria-label="Loop Logic"><img src="/images/icon.png" width="40" height="40" alt="" /><span>Loop Logic</span></a>
-   <nav aria-label={ja ? 'メインナビゲーション' : 'Main navigation'}><a href="#how">{c.nav[0]}</a><a href="#modes">{c.nav[1]}</a></nav>
+   <nav aria-label={ja ? 'メインナビゲーション' : 'Main navigation'}><a href="#how">{c.nav[0]}</a><a href="#adventure">{c.nav[1]}</a></nav>
    <div class="header-actions"><a class="language" href={ja ? '/' : '/ja/'} lang={ja ? 'en' : 'ja'}>{ja ? 'EN' : '日本語'}</a><a class="small-cta" href="#download">{c.nav[2]}</a></div>
   </header>
   <main id="main">
    <section class="hero wrap">
     <div class="hero-copy"><p class="eyebrow">{c.eyebrow}</p><h1>{c.headline[0]}<br /><span>{c.headline[1]}</span></h1><p class="intro">{c.intro}</p>
-     <div class="store-links"><a href={apple} data-store="apple" data-placement="hero" class="store" aria-label={c.ios}><span class="store-symbol" aria-hidden="true">↓</span><span><small>{ja ? 'iPhoneで楽しむ' : 'Download for iPhone'}</small>App Store</span></a><a href={play} data-store="google" data-placement="hero" class="store" aria-label={c.android}><span class="store-symbol play" aria-hidden="true">▷</span><span><small>{ja ? 'Androidで楽しむ' : 'Download for Android'}</small>Google Play</span></a></div><p class="fine">{c.free}</p>
+     <StoreLinks ja={ja} placement="hero" />
+     <a class="explore-link" href="#try-puzzle" data-start-puzzle>{ja ? 'ブラウザで、一問遊んでみる' : 'Try a puzzle in your browser'}<span aria-hidden="true"> ↗</span></a>
+
     </div>
-    <figure class="hero-board"><div class="board-top"><span>THE BEAUTY OF LOGIC</span><span>01 — LOOP</span></div>
-     <svg viewBox="0 0 360 360" role="img" aria-label={c.diagram}>
-      <defs><filter id="glow"><feGaussianBlur stdDeviation="4" /></filter></defs>
-      {[0,1,2,3].map(x => <line x1={60+x*80} y1="60" x2={60+x*80} y2="300" stroke="#262e49" stroke-dasharray="2 6" />)}
-      {[0,1,2,3].map(y => <line x1="60" y1={60+y*80} x2="300" y2={60+y*80} stroke="#262e49" stroke-dasharray="2 6" />)}
-      {grid.map((row,y)=> row.map((n,x)=><text x={100+x*80} y={101+y*80} text-anchor="middle" dominant-baseline="middle" fill={n===0?'#69758f':'#eff3ff'} font-size="30" font-family="ui-monospace, monospace">{n}</text>))}
-      <path class="loop-glow" d="M60 60H300V300H60Z" fill="none" stroke="#8078ff" stroke-width="9" filter="url(#glow)" />
-      <path class="loop" d="M60 60H300V300H60Z" fill="none" stroke="#aaa4ff" stroke-width="4" stroke-linejoin="round" />
-      {[0,1,2,3].map(y=>[0,1,2,3].map(x=><circle cx={60+x*80} cy={60+y*80} r="3.5" fill="#d0d5ef" />))}
-     </svg><figcaption>{c.diagramNote}<span>{ja ? 'ルール説明用の図' : 'Illustration of the rules'}</span></figcaption>
-    </figure>
+    <FirstLoop ja={ja} />
    </section>
    <div class="proof wrap">{c.proof.map(([value,label])=><div><strong>{value}</strong><span>{label}</span></div>)}</div>
    <section id="how" class="section wrap how"><div class="section-heading"><p class="eyebrow">HOW TO PLAY</p><h2>{c.rulesTitle[0]}<br />{c.rulesTitle[1]}</h2><p>{c.rulesIntro}</p></div>
-    <div class="rules">{c.rules.map(([title,text],i)=><article><span class="step">0{i+1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+    <div class="rules">{c.rules.map(([title,text],i)=><article><div class="rule-top"><span class="step">0{i+1}</span><svg viewBox="0 0 92 70" aria-hidden="true" class="rule-diagram">
+       {i===0 ? <><path d="M24 12H68V56H24" /><text x="46" y="36">3</text></> : i===1 ? <path d="M12 50H36V20H76" /> : <path d="M20 12H70V56H20Z" />}
+       {[ [20,12],[70,12],[20,56],[70,56] ].map(([x,y])=>i!==1&&<circle cx={i===0?(x===20?24:68):x} cy={y} r="2" />)}
+      </svg></div><h3>{title}</h3><p>{text}</p></article>)}</div>
    </section>
-   <section id="modes" class="section modes"><div class="wrap"><div class="section-heading"><p class="eyebrow">TWO WAYS TO GET LOST IN LOGIC</p><h2>{c.modesTitle[0]}<br />{c.modesTitle[1]}</h2></div>
-    <div class="mode-grid"><article class="mode standard"><p class="mode-label">01 / STANDARD</p><h3>{c.standard}</h3><p>{c.standardText}</p><ul>{c.standardTags.map(t=><li>{t}</li>)}</ul><div class="image-stage"><img src="/images/standard.jpg" width="222" height="480" loading="lazy" alt={ja ? 'ネオンの線でループを完成させたゲーム画面。現在のストア掲載画像。' : 'Current store image showing a completed neon loop.'} /></div></article>
-    <article class="mode adventure"><p class="mode-label">02 / ADVENTURE</p><h3>{c.adventure}</h3><p>{c.adventureText}</p><ul>{c.adventureTags.map(t=><li>{t}</li>)}</ul><div class="image-stage two"><img src="/images/buffs.jpg" width="222" height="480" loading="lazy" alt={ja ? 'ステージ開始前のバフ選択。現在のストア掲載画像。' : 'Current Japanese store image showing the buff selection screen.'} /><img src="/images/adventure.jpg" width="222" height="480" loading="lazy" alt={ja ? 'バフを使って攻略するアドベンチャー画面。現在のストア掲載画像。' : 'Current Japanese store image showing Adventure gameplay.'} /></div></article></div><p class="gallery-note">{c.galleryLabel}</p>
-   </div></section>
-   <section id="download" class="download section wrap"><img src="/images/icon.png" width="76" height="76" alt="" loading="lazy" /><p class="eyebrow">LOOP LOGIC</p><h2>{c.endTitle[0]}<br />{c.endTitle[1]}</h2><p>{c.endText}</p><div class="store-links"><a href={apple} data-store="apple" data-placement="footer" class="store" aria-label={c.ios}><span class="store-symbol" aria-hidden="true">↓</span><span><small>{ja?'iPhoneで楽しむ':'Download for iPhone'}</small>App Store</span></a><a href={play} data-store="google" data-placement="footer" class="store" aria-label={c.android}><span class="store-symbol play" aria-hidden="true">▷</span><span><small>{ja?'Androidで楽しむ':'Download for Android'}</small>Google Play</span></a></div><p class="fine">{c.free}</p></section>
+   <AdventureStory ja={ja} />
+   <section id="modes" class="section standard-section"><div class="wrap standard-layout"><div><p class="eyebrow">STANDARD MODE</p><h2>{ja ? 'ただ、パズルに' : 'Just you.'}<br/>{ja ? '没頭したい日にも。' : 'And the puzzle.'}</h2><p>{c.standardText}</p><div class="standard-facts"><strong>30,000+</strong><span>{ja ? '収録パズル' : 'puzzles to explore'}</span></div><ul>{c.standardTags.map(t=><li>{t}</li>)}</ul></div><Screenshot src="/images/standard.jpg" ja={ja} alt={ja ? 'スタンダードモードのクリア画面' : 'A completed Standard Mode puzzle (Japanese)'} /></div></section>
+   <section id="download" class="download section wrap"><img src="/images/icon.png" width="76" height="76" alt="" loading="lazy" /><p class="eyebrow">LOOP LOGIC</p><h2>{c.endTitle[0]}<br />{c.endTitle[1]}</h2><p>{c.endText}</p><StoreLinks ja={ja} placement="footer" /></section>
   </main>
+  <dialog class="image-dialog" aria-label={ja ? 'ゲーム画面を拡大' : 'Enlarged game screenshot'}>
+   <form method="dialog"><button class="image-close" autofocus>{ja ? '閉じる' : 'Close'} <span aria-hidden="true">×</span></button></form>
+   <img alt="" width="1242" height="2688" />
+   <p class="image-caption"></p>
+  </dialog>
+  <script>
+   import '../scripts/screenshots';
+  </script>
   <footer class="footer wrap"><div><a class="brand" href={ja?'/ja/':'/'}>Loop Logic</a><p>© {new Date().getFullYear()} overpatch</p></div><div class="footer-links"><a href={`${legal}privacy_${lang}`}>{c.privacy}</a><a href={`${legal}terms_${lang}`}>{c.terms}</a><a href="https://owlaria.overpatch.dev/">{c.related}</a></div></footer>
  </body>
 </html>
