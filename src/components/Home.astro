@@ -19,6 +19,23 @@ const c = ja ? {
 };
 const canonical = `https://looplogic.overpatch.dev${ja ? '/ja/' : '/en/'}`;
 const legal = ja ? '/ja/' : '/en/';
+const appSchema = {
+ '@context': 'https://schema.org',
+ '@type': 'MobileApplication',
+ '@id': 'https://looplogic.overpatch.dev/#app',
+ name: 'Loop Logic',
+ url: canonical,
+ description: c.description,
+ image: 'https://looplogic.overpatch.dev/images/icon.png',
+ operatingSystem: 'iOS, Android',
+ applicationCategory: 'GameApplication',
+ inLanguage: ['ja', 'en'],
+ offers: { '@type': 'Offer', price: 0, priceCurrency: 'USD' },
+ installUrl: [
+  `https://apps.apple.com/${ja ? 'jp' : 'us'}/app/loop-logic/id6758883537`,
+  'https://play.google.com/store/apps/details?id=ch.overpatch.looplogic',
+ ],
+};
 ---
 <!doctype html>
 <html lang={lang}>
@@ -29,6 +46,17 @@ const legal = ja ? '/ja/' : '/en/';
   <link rel="icon" href="/images/icon.png" type="image/png" /><link rel="canonical" href={canonical} />
   <link rel="alternate" hreflang="ja" href="https://looplogic.overpatch.dev/ja/" /><link rel="alternate" hreflang="en" href="https://looplogic.overpatch.dev/en/" /><link rel="alternate" hreflang="x-default" href="https://looplogic.overpatch.dev/" />
   <meta property="og:type" content="website" /><meta property="og:title" content={c.title} /><meta property="og:description" content={c.description} /><meta property="og:url" content={canonical} />
+  <meta property="og:site_name" content="Loop Logic" />
+  <meta property="og:locale" content={ja ? 'ja_JP' : 'en_US'} />
+  <meta property="og:locale:alternate" content={ja ? 'en_US' : 'ja_JP'} />
+  <meta property="og:image" content="https://looplogic.overpatch.dev/images/icon.png" />
+  <meta property="og:image:alt" content="Loop Logic" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={c.title} />
+  <meta name="twitter:description" content={c.description} />
+  <meta name="twitter:image" content="https://looplogic.overpatch.dev/images/icon.png" />
+  <meta name="twitter:image:alt" content="Loop Logic" />
+  <script type="application/ld+json" set:html={JSON.stringify(appSchema).replace(/</g, '\\u003c')} />
  </head>
  <body>
   <a class="skip" href="#main">{ja ? '本文へスキップ' : 'Skip to content'}</a>

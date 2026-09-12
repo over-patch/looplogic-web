@@ -15,7 +15,7 @@ Public claims were checked against the official Apple and Google store listings 
 - https://apps.apple.com/jp/app/loop-logic/id6758883537
 - https://play.google.com/store/apps/details?id=ch.overpatch.looplogic
 
-The existing app icon is from the Loop Logic app repository. Gameplay screenshots supplied on 2026-09-13 are stored as original 1206×2622 PNGs under `public/images/screenshots/{ja,en}/`: `standard.png` (completed Standard puzzle), `adventure.png` (Adventure gameplay), and `buffs.png` (buff selection). The six files were moved from `sozai/` and renamed without modifying their contents. The previous three store-marketing JPEGs were deleted.
+The existing app icon is from the Loop Logic app repository. Gameplay screenshots supplied on 2026-09-13 are stored as original 1206×2622 PNGs under `src/assets/screenshots/{ja,en}/`: `standard.png` (completed Standard puzzle), `adventure.png` (Adventure gameplay), and `buffs.png` (buff selection). The six files were moved from `sozai/` and renamed without modifying their contents. The previous three store-marketing JPEGs were deleted.
 
 `AppScreen.astro` selects the screenshot language using the page locale and shows the entire image at its native aspect ratio. Screenshots are non-interactive; no enlargement dialog is used. Replace the matching locale file to update a screenshot; preserve its dimensions or update the component dimensions and CSS aspect ratio if needed. The visible practice puzzle follows the hero and highlights. The hero’s “Try a puzzle” link starts the challenge directly.
 
@@ -55,3 +55,12 @@ The original GitHub Pages site and app/store links are unchanged. After the prod
 Desktop download sections (900px and wider) include separate App Store and Google Play QR codes in `public/images/qr/`. They encode the same direct store URLs as the badges, with Japanese/US App Store destinations selected by page language. They never point to the private review site. Mobile retains the store badges without QR codes. Regenerate with `scripts/generate-store-qr.py` using Python `qrcode==8.2`; generated SVG files are committed, so the app has no QR runtime dependency.
 
 The shared `LanguageSwitcher.astro` shows a globe and localized Language label (icon-only on small screens). Its expandable list uses each language’s native name and marks the current language. Add menu options in its `languages` array alongside the corresponding localized routes and entry-point detection support. It preserves the current legal page, query, anchor, and remembered manual choice. Native details and links remain usable without JavaScript.
+
+## Technical SEO (2026-09-13)
+
+- The visible home-page text, CSS, gameplay and language redirects are preserved.
+- Original screenshot PNGs now live in `src/assets/screenshots/{ja,en}/`. Astro generates WebP variants at 240, 480, 720 and 960px widths (quality 90), with responsive selection and unchanged aspect ratios. Only the main hero screenshot has high fetch priority; both hero screenshots remain eager. Replace the original assets to regenerate all sizes on build.
+- Home pages include localized Open Graph and X metadata using the existing app icon, plus MobileApplication JSON-LD grounded in the visible app information. No ratings or reviews are invented; Google software-app rich-result eligibility is not claimed without a qualifying review/rating.
+- The sitemap lists the six canonical locale pages. The neutral `/` entry still selects a language and declares `/en/` canonical; it remains the hreflang x-default destination but is excluded from the sitemap.
+- Production URLs remain `https://looplogic.overpatch.dev`. The Sites review deployment is owner-private, so publishing it does not enable Google indexing. Activate the public domain and verify HTTPS, 200 responses, robots headers, canonical/hreflang and sitemap before submitting to Search Console. Confirm nonexistent URLs return 404.
+- Search Console ownership verification and analytics are not configured by this change. Once the public site is active, submit `/sitemap.xml` and inspect `/ja/` and `/en/`. For analytics, select a collector and account first; existing store-link attributes identify store and placement. Store clicks are not installations.

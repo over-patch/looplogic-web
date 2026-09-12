@@ -1,1 +1,1 @@
-{"name":"looplogic-web","version":"0.1.0","private":true,"type":"module","scripts":{"dev":"astro dev --host 127.0.0.1","build":"astro build","preview":"astro preview --host 127.0.0.1"},"dependencies":{"astro":"^5.13.0"},"packageManager":"pnpm@10.15.1"}
+{"name":"looplogic-web","version":"0.1.0","private":true,"type":"module","scripts":{"dev":"astro dev --host 127.0.0.1","build":"astro build","preview":"astro preview --host 127.0.0.1"},"dependencies":{"astro":"^5.13.0","sharp":"^0.35.4"},"packageManager":"pnpm@10.15.1"}

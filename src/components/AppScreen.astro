@@ -1,8 +1,11 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 interface Props { screen: 'standard' | 'adventure' | 'buffs'; alt: string; ja: boolean; eager?: boolean; }
 const { screen, alt, ja, eager = false } = Astro.props;
-const src = `/images/screenshots/${ja ? 'ja' : 'en'}/${screen}.png`;
+const screenshots = import.meta.glob<{ default: ImageMetadata }>('../assets/screenshots/**/*.png', { eager: true });
+const src = screenshots[`../assets/screenshots/${ja ? 'ja' : 'en'}/${screen}.png`].default;
 ---
 <div class="app-screen">
- <img src={src} width="1206" height="2622" alt={alt} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} />
+ <Image src={src} widths={[240, 480, 720, 960]} sizes="(max-width: 720px) 240px, 280px" format="webp" quality={90} alt={alt} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager && screen === 'standard' ? 'high' : 'auto'} />
 </div>
