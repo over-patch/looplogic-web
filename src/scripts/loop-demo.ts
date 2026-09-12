@@ -80,6 +80,13 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(root=>{
   instruction.textContent=n===0?choose('0の周りは線なし。隣の2から考えてみよう。','No lines around 0. Start with the neighboring 2s.'):choose('タップで線を引く。もう一度で取り消し。','Tap to draw. Tap again to undo.');
   reset.disabled=false;reset.textContent=choose('やり直す','Reset');next.textContent=choose('ヒント','Hint');
  };
+ document.querySelectorAll<HTMLAnchorElement>('[data-start-demo]').forEach(link=>{
+  link.addEventListener('click',()=>{
+   if(mode==='watch')invite(0);
+   // Let the normal anchor scroll land on the now-playable board.
+   root.focus({preventScroll:true});
+  });
+ });
  next.addEventListener('click',()=>{
   if(mode==='watch'){invite(0);return;}
   if(mode==='done'){if(round===0)invite(1);else document.querySelector('#download')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}

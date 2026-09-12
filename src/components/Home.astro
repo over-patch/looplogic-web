@@ -43,6 +43,7 @@ const legal = ja ? '/ja/' : '/';
      <h1 id="hero-title">{ja ? '数字をつないで、' : 'Follow the numbers.'}<br/><span>{ja ? 'ひとつの輪に。' : 'Find your loop.'}</span></h1>
      <p class="hero-description">{ja ? 'ひらめきが、線になる。' : 'A little logic. A moment of insight.'}<br/>{ja ? '広告なしで楽しむロジックパズル。' : 'An ad-free logic puzzle, right on your phone.'}</p>
      <StoreLinks ja={ja} placement="hero" />
+     <a class="demo-link" href="#try-puzzle" data-start-demo>{ja ? '一問遊んでみる' : 'Try a puzzle'} <span aria-hidden="true">↓</span></a>
     </div>
     <div class="hero-product">
      <div class="hero-screens">
@@ -57,6 +58,10 @@ const legal = ja ? '/ja/' : '/';
     <li><strong>30,000<span>+</span></strong><span>{ja ? 'たっぷり遊べるパズル' : 'Puzzles to explore'}</span></li>
     <li><strong>{ja ? '2つのモード' : '2 ways to play'}</strong><span>{ja ? 'じっくりも、挑戦も' : 'Relax or take a challenge'}</span></li>
    </ul>
+   <section id="how" class="demo-feature section wrap" aria-labelledby="how-title">
+    <div class="demo-feature-copy"><p class="eyebrow">{ja ? 'この場で、遊んでみよう' : 'TRY IT RIGHT HERE'}</p><h2 id="how-title">{ja ? 'ひとつつながると、' : 'One line connects.'}<br/>{ja ? '次が見えてくる。' : 'The next one clicks.'}</h2><p>{ja ? '数字の数だけ線を引いて、ひとつの輪に。まずは線がつながる様子を見て、自分でも一問。' : 'Draw as many lines as each number asks for, and make one loop. Watch it come together, then try a puzzle yourself.'}</p><p class="demo-note">{ja ? 'ダウンロードなしで遊べる、お試しパズルです。' : 'A small practice puzzle. No download needed.'}</p></div>
+    <FirstLoop ja={ja}/>
+   </section>
    <section id="modes" class="mode-overview section wrap" aria-labelledby="modes-title">
     <div class="section-heading"><p class="eyebrow">{ja ? '気分で選べる、2つの遊び方' : 'TWO WAYS TO PLAY'}</p><h2 id="modes-title">{ja ? 'じっくりも、挑戦も。' : 'Find your pace. Or chase a new best.'}</h2></div>
     <div class="mode-cards">
@@ -71,11 +76,6 @@ const legal = ja ? '/ja/' : '/';
     </div>
    </section>
    <AdventureStory ja={ja} />
-   <section id="how" class="quick-how section wrap" aria-labelledby="how-title">
-    <div class="quick-how-copy"><p class="eyebrow">{ja ? '遊び方は、シンプル' : 'SIMPLE RULES'}</p><h2 id="how-title">{ja ? '数字の数だけ線を。' : 'Match each number.'}<br/>{ja ? 'つないで、ひとつの輪に。' : 'Make one loop.'}</h2><p>{ja ? '線は枝分かれせず、ひとつにつなげます。' : 'Connect the lines without branching.'}</p></div>
-    <div class="quick-how-visual"><svg class="one-loop-diagram" viewBox="0 0 300 140" role="img" aria-label={ja ? '3・2・3の数字を満たす、ひとつの輪の完成例' : 'One loop satisfying the clues 3, 2 and 3'}><path class="guide" d="M50 35H250M50 105H250M50 35V105M117 35V105M183 35V105M250 35V105"/><path class="loop" d="M50 35H250V105H50Z"/>{[3,2,3].map((n,i)=><text x={83+i*67} y="72">{n}</text>)}{[35,105].map(y=>[50,117,183,250].map(x=><circle cx={x} cy={y} r="3"/>))}</svg><span>{ja ? '数字も、輪も、そろったらクリア。' : 'Every clue met. One loop. Solved.'}</span></div>
-    <details class="practice-disclosure"><summary>{ja ? 'ここで一問、試してみる' : 'Try a puzzle here'}<span aria-hidden="true">＋</span></summary><div class="practice-content"><p>{ja ? '線のつなぎ方を見てから、自分でも挑戦できます。' : 'Watch the lines connect, then give it a try.'}</p><FirstLoop ja={ja}/></div></details>
-   </section>
    <section id="download" class="download section wrap"><img src="/images/icon.png" width="76" height="76" alt="" loading="lazy" /><p class="eyebrow">LOOP LOGIC</p><h2>{ja ? '次のひらめきは、' : 'Your next moment of insight.'}<br/>{ja ? 'あなたのスマホで。' : 'Right on your phone.'}</h2><p>{ja ? '一問から、無料で始めよう。' : 'Start with one puzzle. Download for free.'}</p><StoreLinks ja={ja} placement="footer" /></section>
   </main>
   <dialog class="image-dialog" aria-label={ja ? 'ゲーム画面を拡大' : 'Enlarged game screenshot'}>
@@ -84,15 +84,6 @@ const legal = ja ? '/ja/' : '/';
   </dialog>
   <script>
    import '../scripts/screenshots';
-   // Preserve direct links to the optional practice board.
-   const revealPractice = () => {
-    if (location.hash !== '#try-puzzle') return;
-    const details = document.querySelector<HTMLDetailsElement>('.practice-disclosure');
-    if (details) details.open = true;
-    document.getElementById('try-puzzle')?.scrollIntoView();
-   };
-   addEventListener('hashchange', revealPractice);
-   revealPractice();
   </script>
   <footer class="footer wrap"><div><a class="brand" href={ja?'/ja/':'/'}>Loop Logic</a><p>© {new Date().getFullYear()} overpatch</p></div><div class="footer-links"><a href={`${legal}privacy/`}>{ja ? 'プライバシーポリシー' : 'Privacy policy'}</a><a href={`${legal}terms/`}>{ja ? '利用規約' : 'Terms of use'}</a></div></footer>
  </body>

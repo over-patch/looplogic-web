@@ -15,7 +15,7 @@ Public claims were checked against the official Apple and Google store listings 
 - https://apps.apple.com/jp/app/loop-logic/id6758883537
 - https://play.google.com/store/apps/details?id=ch.overpatch.looplogic
 
-The existing app icon is from the Loop Logic app repository. The three JPEGs are current Japanese App Store marketing images fetched through Apple's lookup API, updated to 1242×2688 on 2026-09-12. Replace them with approved current screenshots when the store artwork is refreshed. The hero displays the phone portions of the existing store images using CSS; clicking opens the complete, unmodified artwork. The optional practice puzzle lives under How to play. English currently uses the same Japanese store imagery and labels that limitation in the page.
+The existing app icon is from the Loop Logic app repository. The three JPEGs are current Japanese App Store marketing images fetched through Apple's lookup API, updated to 1242×2688 on 2026-09-12. Replace them with approved current screenshots when the store artwork is refreshed. The hero displays the phone portions of the existing store images using CSS; clicking opens the complete, unmodified artwork. The visible practice puzzle follows the hero and highlights. The hero’s “Try a puzzle” link starts the challenge directly. English currently uses the same Japanese store imagery and labels that limitation in the page.
 
 Shared content: `src/components/Home.astro`. Shared styling: `src/styles/global.css`.
 Both store destinations are explicit; there is no automatic platform or language redirect.
@@ -45,5 +45,5 @@ The original GitHub Pages site and app/store links are unchanged. After the prod
 
 - Japanese and English home pages lead with explicit iOS/Android app positioning, store badges, and two gameplay screens. Existing store artwork is displayed through CSS cropping; the original files are unchanged and can be enlarged.
 - Standard and Adventure modes are presented together near the top, each with gameplay imagery. Adventure introduces buffs in plain language alongside the actual store selection screen.
-- Detailed buff combinations, the four-stage example, and challenge limits remain available in a native disclosure. The repeated three-step tutorial is replaced by one diagram and an optional playable demo, preserving both puzzles, hints, pause, reset, and direct `#try-puzzle` links.
+- Detailed buff combinations, the four-stage example, and challenge limits remain available in a native disclosure. The repeated three-step tutorial is replaced by a visible playable demo near the top, preserving both puzzles, hints, pause, reset, and direct `#try-puzzle` links.
 - Presentation changes are scoped to `src/styles/home.css`. Legal documents, store destinations, and language selection are preserved. English identifies the Japanese screenshot language.
