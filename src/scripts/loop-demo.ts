@@ -9,6 +9,7 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(root=>{
  let timer:ReturnType<typeof setTimeout>|undefined;
  const placed=new Set<string>();
  const finalBeat=previewFrames.length-1;
+ let demoCelebrated=false;
  const celebrate=()=>{
   root.querySelector('.puzzle-confetti')?.remove();
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -62,12 +63,14 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(root=>{
   });
   buttons.forEach(b=>{const e=b.dataset.edge!;const newlyDrawn=mode==='watch'&&previewFrames[beat].edge===e&&b.dataset.state!=='line';b.classList.toggle('is-new-line',newlyDrawn);b.dataset.state=placed.has(e)?'line':'empty';b.disabled=mode!=='play';b.classList.remove('is-fixed');b.setAttribute('aria-pressed',String(placed.has(e)));const invalid=mode==='play'&&(status.excessEdges.has(e)||status.branchEdges.has(e));b.classList.toggle('is-error',invalid);b.setAttribute('aria-label',baseLabels.get(b)!+choose(placed.has(e)?'、線あり':'、線なし',placed.has(e)?', line drawn':', no line')+(invalid?choose('、つながりを見直してください',', check this connection'):''));});
  };
- const schedule=()=>{stop();if(mode==='watch'&&beat<finalBeat&&!paused&&visible&&!document.hidden)timer=setTimeout(()=>{beat++;watch();},beat===0?800:550);};
+ const schedule=()=>{stop();if(mode==='watch'&&beat<finalBeat&&!paused&&visible&&!document.hidden)timer=setTimeout(()=>{beat++;watch();},beat===1||beat===2?900:2200);};
  const watch=()=>{
+  if(beat===0){demoCelebrated=false;root.querySelector('.puzzle-confetti')?.remove();}
   placed.clear();
   previewFrames.slice(0,beat+1).forEach(step=>{if(step.edge)placed.add(step.edge);});
   draw();progress.textContent=beat===finalBeat?choose('つながった。今度は、あなたも。','It connects. Now it’s your turn.'):choose('数字と同じ本数、線を引く。','Match the number with lines.');
-  instruction.textContent=beat===finalBeat?choose('全部の数字を満たして、ひとつの輪に。','Satisfy every number. Make one loop.'):choose('ひとつの輪ができるまで。','Watch one loop come together.');
+  instruction.textContent=choose(previewFrames[beat].ja,previewFrames[beat].en);
+  if(beat===finalBeat&&!demoCelebrated){demoCelebrated=true;celebrate();}
   reset.disabled=false;
   reset.textContent=beat===finalBeat?choose('もう一度見る','Watch again'):paused?choose('再生','Play'):choose('一時停止','Pause');next.textContent=choose('一問、遊んでみる','Try a puzzle');schedule();
  };
@@ -77,10 +80,6 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(root=>{
   instruction.textContent=n===0?choose('0の周りは線なし。隣の2から考えてみよう。','No lines around 0. Start with the neighboring 2s.'):choose('タップで線を引く。もう一度で取り消し。','Tap to draw. Tap again to undo.');
   reset.disabled=false;reset.textContent=choose('やり直す','Reset');next.textContent=choose('ヒント','Hint');
  };
- document.querySelectorAll<HTMLAnchorElement>('[data-start-puzzle]').forEach(link=>link.addEventListener('click',()=>{
-  if(mode==='watch')invite(0);
-  root.focus({preventScroll:true});
- }));
  next.addEventListener('click',()=>{
   if(mode==='watch'){invite(0);return;}
   if(mode==='done'){if(round===0)invite(1);else document.querySelector('#adventure')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}

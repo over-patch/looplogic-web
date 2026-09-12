@@ -17,7 +17,7 @@ function puzzle(points:number[][],missing:string[],shown:number[][]){
  return {solution,clues,fixed:solution.filter(e=>!missing.includes(e)),missing};
 }
 // Three purpose-built website examples. These are not claimed to be app screenshots or stages.
-export const demo=puzzle([[0,0],[1,0],[1,1],[3,1],[3,3],[0,3],[0,0]],[],[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]]);
+export const demo=puzzle([[1,1],[0,1],[0,2],[1,2],[1,3],[3,3],[3,0],[1,0],[1,1]],[],[[0,1],[1,0],[1,1],[1,2],[2,0]]);
 export const challenges=[
  puzzle([[2,0],[3,0],[3,3],[0,3],[0,2],[1,2],[1,1],[2,1],[2,0]],[],[[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]),
  puzzle([[0,0],[3,0],[3,3],[2,3],[2,1],[1,1],[1,3],[0,3],[0,0]],['v-2-2','v-1-2','h-1-1','v-1-1'],[[0,1],[1,0],[1,1],[1,2],[2,0],[2,2]])
@@ -38,19 +38,22 @@ export function solved(lines: Set<string>, grid:Grid) {
  return seen.size===graph.size;
 }
 
-// Start partway through: these lines are already established, not guessed during the demo.
-export const demoStart = ['h-0-0','v-0-0','v-1-0'];
+// Start empty. The adjacent 3 and 0 establish the first three lines.
+export const demoStart: string[] = [];
 export const demoSteps = [
- { edge: null, cell: '1-0', ja: '途中の盤面から見てみましょう。左中央の「1」は、左の線でもう満たされています。', en: 'Start from a partly solved board. The middle-left 1 already has its line on the left.' },
- { edge: 'v-0-1', cell: '0-0', ja: 'その「1」の上には引けません。だから左上の「3」の残り1本は、右の辺です。', en: 'We cannot draw above that 1. So the top-left 3 must get its third line on the right.' },
- { edge: 'h-1-1', cell: '0-1', ja: '線の端をつなぎます。「3」は満たされているので、右へ伸ばします。', en: 'Continue the open end. The 3 is satisfied, so the line extends to the right.' },
- { edge: 'h-1-2', cell: '1-1', ja: '中央の「1」も満たされました。下に曲がれないので、さらに右へ。', en: 'The central 1 is satisfied too. The line cannot turn down, so continue right.' },
- { edge: 'v-1-3', cell: '0-2', ja: '右上の「1」も満たされています。今度は下へつなぎます。', en: 'The top-right 1 is satisfied. Now continue downward.' },
- { edge: 'v-2-3', cell: '1-2', ja: '右中央の「2」が満たされました。線を途切れさせず、下へ。', en: 'The middle-right 2 is satisfied. Keep the line connected by going down.' },
- { edge: 'h-3-2', cell: '2-2', ja: '盤面の角で左に曲がり、右下の「2」を満たします。', en: 'Turn left at the corner to satisfy the bottom-right 2.' },
- { edge: 'h-3-1', cell: '2-2', ja: '右下の「2」は満たされています。上には曲がれないので、左へ。', en: 'The bottom-right 2 is satisfied. We cannot turn up, so continue left.' },
- { edge: 'h-3-0', cell: '2-1', ja: '下中央の「1」が満たされました。さらに左へ。', en: 'The bottom-middle 1 is satisfied. Continue left.' },
- { edge: 'v-2-0', cell: '2-0', ja: '最後の1本で、すべての数字を満たすひとつの輪が完成。', en: 'One last line completes a single loop and satisfies every number.' },
+ { edge: null, cell: '1-1', ja: '「0」の周りには、線を引きません。', en: 'No lines go around the 0.' },
+ { edge: 'h-1-0', cell: '1-0', ja: '隣の「3」は、0と接しない上・左・下に3本。', en: 'The neighboring 3 needs its top, left and bottom edges.' },
+ { edge: 'v-1-0', cell: '1-0', ja: '隣の「3」は、0と接しない上・左・下に3本。', en: 'The neighboring 3 needs its top, left and bottom edges.' },
+ { edge: 'h-2-0', cell: '1-0', ja: 'これで「3」の周りに、3本そろいました。', en: 'All three lines around the 3 are in place.' },
+ { edge: 'v-2-1', cell: '1-1', ja: '下の線の端は、0を避けて下へつなぎます。', en: 'Extend the lower end downward, away from the 0.' },
+ { edge: 'h-3-1', cell: '2-0', ja: '左下の「2」は上と右で2本。下端は右へ。', en: 'The lower-left 2 has its top and right lines. Continue right.' },
+ { edge: 'v-0-1', cell: '1-1', ja: '上の線の端も、0を避けて上へつなぎます。', en: 'Extend the upper end upward, away from the 0.' },
+ { edge: 'h-0-1', cell: '0-1', ja: '左へ進むと3の角で枝分かれするので、右へ。', en: 'Going left would branch at the 3. Turn right.' },
+ { edge: 'h-0-2', cell: '0-1', ja: '上の「2」も2本そろったので、さらに右へ。', en: 'The upper 2 has both lines. Keep going right.' },
+ { edge: 'v-0-3', cell: '0-1', ja: '右上の角で、下へ曲がります。', en: 'Turn downward at the top-right corner.' },
+ { edge: 'v-1-3', cell: '1-2', ja: '左へ曲がると0か上の2に触れるので、下へ。', en: 'Turning left would reach the 0 or the satisfied 2. Go down.' },
+ { edge: 'v-2-3', cell: '1-2', ja: '右の「1」もそろったので、そのまま下へ。', en: 'The right-hand 1 has its line. Continue downward.' },
+ { edge: 'h-3-2', cell: '1-2', ja: '全部の数字を満たして、ひとつの輪に。', en: 'Satisfy every number. Make one loop.' },
 ];
 
 export function feedback(lines:Set<string>, grid:Grid) {
@@ -69,12 +72,5 @@ export function feedback(lines:Set<string>, grid:Grid) {
  return {excessCells,excessEdges,branchEdges,satisfied,total};
 }
 
-// The marketing preview starts empty and draws the complete loop, one edge per frame.
-export const previewFrames = [
- {edge: null as string|null, cell: ''},
- ...demo.solution.map(edge=>{
-  let cell='';
-  for(let r=0;r<3;r++)for(let c=0;c<3;c++)if(!cell&&demo.clues[r][c]!==null&&cellEdges(r,c).includes(edge))cell=`${r}-${c}`;
-  return {edge,cell};
- })
-];
+// Playback and deduction checks share the same explicit drawing order.
+export const previewFrames = demoSteps;

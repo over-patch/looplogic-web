@@ -4,7 +4,7 @@ import '../styles/adventure.css';
 import AdventureStory from './AdventureStory.astro';
 import FirstLoop from './FirstLoop.astro';
 import StoreLinks from './StoreLinks.astro';
-import Screenshot from './Screenshot.astro';
+import LanguageSuggestion from './LanguageSuggestion.astro';
 const { lang = 'ja' } = Astro.props;
 const ja = lang === 'ja';
 const c = ja ? {
@@ -33,12 +33,12 @@ const legal = 'https://over-patch.github.io/overpatch-legal/looplogic/';
   <header class="site-header"><div class="header wrap">
    <a class="brand" href={ja ? '/ja/' : '/'} aria-label="Loop Logic"><img src="/images/icon.png" width="40" height="40" alt="" /><span>Loop Logic</span></a>
    <nav aria-label={ja ? 'メインナビゲーション' : 'Main navigation'}><a href="#how">{c.nav[0]}</a><a href="#adventure">{c.nav[1]}</a></nav>
-   <div class="header-actions"><a class="language" href={ja ? '/' : '/ja/'} lang={ja ? 'en' : 'ja'}>{ja ? 'EN' : '日本語'}</a><a class="small-cta" href="#download">{c.nav[2]}</a></div>
+   <div class="header-actions"><a class="language" href={ja ? '/' : '/ja/'} lang={ja ? 'en' : 'ja'} data-language-choice={ja ? 'en' : 'ja'}>{ja ? 'EN' : '日本語'}</a><a class="small-cta" href="#download">{c.nav[2]}</a></div>
   </div></header>
+  <LanguageSuggestion lang={lang} />
   <main id="main">
    <section class="hero wrap">
     <div class="hero-copy"><p class="eyebrow">{c.eyebrow}</p><h1>{c.headline[0]}<br /><span>{c.headline[1]}</span></h1><p class="intro">{c.intro}</p>
-     <a class="explore-link" href="#try-puzzle" data-start-puzzle>{ja ? 'ブラウザで、一問遊んでみる' : 'Try a puzzle in your browser'}<span aria-hidden="true"> ↗</span></a>
 
     </div>
     <FirstLoop ja={ja} />
@@ -51,7 +51,7 @@ const legal = 'https://over-patch.github.io/overpatch-legal/looplogic/';
       </svg></div><h3>{title}</h3><p>{text}</p></article>)}</div>
    </section>
    <AdventureStory ja={ja} />
-   <section id="modes" class="section standard-section"><div class="wrap standard-layout"><div><p class="eyebrow">STANDARD MODE</p><h2>{ja ? 'ただ、パズルに' : 'Just you.'}<br/>{ja ? '没頭したい日にも。' : 'And the puzzle.'}</h2><p>{c.standardText}</p><div class="standard-facts"><strong>30,000+</strong><span>{ja ? '収録パズル' : 'puzzles to explore'}</span></div><ul>{c.standardTags.map(t=><li>{t}</li>)}</ul></div><Screenshot src="/images/standard.jpg" ja={ja} alt={ja ? 'スタンダードモードのクリア画面' : 'A completed Standard Mode puzzle (Japanese)'} /></div></section>
+   <section id="modes" class="section standard-section"><div class="wrap standard-layout"><div><p class="eyebrow">STANDARD MODE</p><h2>{ja ? 'ただ、パズルに' : 'Just you.'}<br/>{ja ? '没頭したい日にも。' : 'And the puzzle.'}</h2><p>{c.standardText}</p><div class="standard-facts"><strong>30,000+</strong><span>{ja ? '収録パズル' : 'puzzles to explore'}</span></div><ul>{c.standardTags.map(t=><li>{t}</li>)}</ul></div></div></section>
    <section id="download" class="download section wrap"><img src="/images/icon.png" width="76" height="76" alt="" loading="lazy" /><p class="eyebrow">LOOP LOGIC</p><h2>{c.endTitle[0]}<br />{c.endTitle[1]}</h2><p>{c.endText}</p><StoreLinks ja={ja} placement="footer" /></section>
   </main>
   <dialog class="image-dialog" aria-label={ja ? 'ゲーム画面を拡大' : 'Enlarged game screenshot'}>
