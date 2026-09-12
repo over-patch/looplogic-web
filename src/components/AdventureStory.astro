@@ -19,7 +19,7 @@ const decisions = ja ? [
     <ol class="adventure-flow"><li><span>01</span>{ja ? '強化を選ぶ' : 'Pick an upgrade'}</li><li><span>02</span>{ja ? 'パズルを解く' : 'Solve the puzzle'}</li><li><span>03</span>{ja ? '次のステージへ' : 'Take it to the next stage'}</li></ol>
     <p class="challenge-note">{ja ? 'デイリーチャレンジでは、合計タイムで月間ランキングに挑戦。' : 'Take on the daily challenge and compete for the best total time on the monthly leaderboard.'}</p>
    </div>
-   <figure class="buff-screen"><AppScreen src="/images/buffs.jpg" alt={ja ? '3つの強化から選ぶ、アプリのバフ選択画面' : 'The app’s buff selection screen with three upgrades'} ja={ja}/><figcaption>{ja ? 'アプリの強化選択画面' : 'Buff selection · Japanese screen shown'}</figcaption></figure>
+   <figure class="buff-screen"><AppScreen screen="buffs" alt={ja ? '3つの強化から選ぶ、アプリのバフ選択画面' : 'The app’s buff selection screen with three upgrades'} ja={ja}/><figcaption>{ja ? 'アプリの強化選択画面' : 'Buff selection'}</figcaption></figure>
   </div>
   <details class="adventure-details"><summary>{ja ? 'バフの組み合わせと挑戦ルールを詳しく見る' : 'Explore buff combinations and challenge rules'}<span aria-hidden="true">＋</span></summary><div class="adventure-details-content"><AdventureMedia ja={ja}/><div class="adventure-decisions">{decisions.map(([label,title,description])=><article><h4>{title}</h4><p>{description}</p></article>)}</div><p class="detail-availability">{ja ? '後半ほど高いティアのバフが出やすくなります。デイリーは通常1日1回。追加挑戦は100 SP。Legendプランでは1日5回に加え、ランキング対象外のトレーニングも利用できます。' : 'Higher-tier buffs become more likely in later stages. One daily attempt as standard; additional attempts cost 100 SP. The Legend plan includes five daily attempts and unranked training.'}</p></div></details>
  </div>

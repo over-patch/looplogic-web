@@ -15,7 +15,9 @@ Public claims were checked against the official Apple and Google store listings 
 - https://apps.apple.com/jp/app/loop-logic/id6758883537
 - https://play.google.com/store/apps/details?id=ch.overpatch.looplogic
 
-The existing app icon is from the Loop Logic app repository. The three JPEGs are current Japanese App Store marketing images fetched through Apple's lookup API, updated to 1242×2688 on 2026-09-12. Replace them with approved current screenshots when the store artwork is refreshed. The hero displays the phone portions of the existing store images using CSS; clicking opens the complete, unmodified artwork. The visible practice puzzle follows the hero and highlights. The hero’s “Try a puzzle” link starts the challenge directly. English currently uses the same Japanese store imagery and labels that limitation in the page.
+The existing app icon is from the Loop Logic app repository. Gameplay screenshots supplied on 2026-09-13 are stored as original 1206×2622 PNGs under `public/images/screenshots/{ja,en}/`: `standard.png` (completed Standard puzzle), `adventure.png` (Adventure gameplay), and `buffs.png` (buff selection). The six files were moved from `sozai/` and renamed without modifying their contents. The previous three store-marketing JPEGs were deleted.
+
+`AppScreen.astro` selects the screenshot language using the page locale and shows the entire image at its native aspect ratio. Clicking opens the original in the image dialog. Replace the matching locale file to update a screenshot; preserve its dimensions or update the component dimensions and CSS aspect ratio if needed. The visible practice puzzle follows the hero and highlights. The hero’s “Try a puzzle” link starts the challenge directly.
 
 Shared content: `src/components/Home.astro`. Shared styling: `src/styles/global.css`.
 Both store destinations are explicit; there is no automatic platform or language redirect.
@@ -43,7 +45,7 @@ The original GitHub Pages site and app/store links are unchanged. After the prod
 
 ## App-first redesign (2026-09-13)
 
-- Japanese and English home pages lead with explicit iOS/Android app positioning, store badges, and two gameplay screens. Existing store artwork is displayed through CSS cropping; the original files are unchanged and can be enlarged.
-- Standard and Adventure modes are presented together near the top, each with gameplay imagery. Adventure introduces buffs in plain language alongside the actual store selection screen.
+- Japanese and English home pages lead with explicit iOS/Android app positioning, store badges, and two gameplay screens. Localized screenshots are displayed without cropping and can be enlarged.
+- Standard and Adventure modes are presented together near the top, each with gameplay imagery. Adventure introduces buffs in plain language alongside the localized buff selection screen.
 - Detailed buff combinations, the four-stage example, and challenge limits remain available in a native disclosure. The repeated three-step tutorial is replaced by a visible playable demo near the top, preserving both puzzles, hints, pause, reset, and direct `#try-puzzle` links.
-- Presentation changes are scoped to `src/styles/home.css`. Legal documents, store destinations, and language selection are preserved. English identifies the Japanese screenshot language.
+- Presentation changes are scoped to `src/styles/home.css`. Legal documents, store destinations, and language selection are preserved. Each language displays its own screenshots.

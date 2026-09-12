@@ -47,10 +47,10 @@ const legal = ja ? '/ja/' : '/';
     </div>
     <div class="hero-product">
      <div class="hero-screens">
-      <figure class="hero-phone hero-phone-main"><AppScreen src="/images/standard.jpg" alt={ja ? 'Loop Logicの通常モード。線がつながったパズルのクリア画面' : 'Loop Logic Standard Mode: a completed puzzle'} ja={ja} eager={true}/><figcaption>{ja ? 'じっくり、ひとつずつ。' : 'One satisfying puzzle.'}</figcaption></figure>
-      <figure class="hero-phone hero-phone-side"><AppScreen src="/images/adventure.jpg" alt={ja ? 'Loop Logicのアドベンチャー。強化を重ねて挑むプレイ画面' : 'Loop Logic Adventure Mode: a puzzle with collected buffs'} ja={ja} eager={true}/><figcaption>{ja ? '強化を選んで、次へ。' : 'A new way to challenge yourself.'}</figcaption></figure>
+      <figure class="hero-phone hero-phone-main"><AppScreen screen="standard" alt={ja ? 'Loop Logicの通常モード。線がつながったパズルのクリア画面' : 'Loop Logic Standard Mode: a completed puzzle'} ja={ja} eager={true}/><figcaption>{ja ? 'じっくり、ひとつずつ。' : 'One satisfying puzzle.'}</figcaption></figure>
+      <figure class="hero-phone hero-phone-side"><AppScreen screen="adventure" alt={ja ? 'Loop Logicのアドベンチャー。強化を重ねて挑むプレイ画面' : 'Loop Logic Adventure Mode: a puzzle with collected buffs'} ja={ja} eager={true}/><figcaption>{ja ? '強化を選んで、次へ。' : 'A new way to challenge yourself.'}</figcaption></figure>
      </div>
-     <p class="screen-caption">{ja ? 'アプリのプレイ画面' : 'App gameplay · Japanese screens shown'}</p>
+     <p class="screen-caption">{ja ? 'アプリのプレイ画面' : 'App gameplay'}</p>
     </div>
    </section>
    <ul class="app-proof wrap" aria-label={ja ? 'アプリの特徴' : 'App features'}>
@@ -67,11 +67,11 @@ const legal = ja ? '/ja/' : '/';
     <div class="mode-cards">
      <article class="mode-card standard-card">
       <div class="mode-copy"><p class="mode-label">{ja ? '通常モード' : 'STANDARD MODE'}</p><h3>{ja ? '気ままに、' : 'Your puzzle.'}<br/>{ja ? 'ひとつずつ。' : 'Your pace.'}</h3><p>{ja ? 'サイズと難易度を選んで、パズルに没頭。小さな一問から、難問まで。' : 'From compact grids to bigger challenges. Choose your size and difficulty, then settle into a puzzle.'}</p><ul class="mode-tags"><li>{ja ? '30,000問以上' : '30,000+ puzzles'}</li><li>{ja ? '3段階の難易度' : '3 difficulty levels'}</li></ul></div>
-      <AppScreen src="/images/standard.jpg" alt={ja ? '通常モードのパズル画面' : 'A Standard Mode puzzle'} ja={ja}/>
+      <AppScreen screen="standard" alt={ja ? '通常モードのパズル画面' : 'A Standard Mode puzzle'} ja={ja}/>
      </article>
      <article class="mode-card adventure-card">
       <div class="mode-copy"><p class="mode-label">{ja ? 'アドベンチャー' : 'ADVENTURE MODE'}</p><h3>{ja ? '強化して、' : 'Your choices.'}<br/>{ja ? '挑もう。' : 'Your next best run.'}</h3><p>{ja ? '強化を組み合わせ、全4ステージへ。自分だけの攻略で、ベストタイムを。' : 'Pick upgrades to help you through four stages. Try a new combination and chase your best time.'}</p><a class="text-link" href="#adventure">{ja ? '強化を選ぶ楽しさを見る' : 'Explore Adventure'} <span aria-hidden="true">↗</span></a></div>
-      <AppScreen src="/images/adventure.jpg" alt={ja ? 'アドベンチャーのパズルと獲得した強化' : 'An Adventure puzzle with collected upgrades'} ja={ja}/>
+      <AppScreen screen="adventure" alt={ja ? 'アドベンチャーのパズルと獲得した強化' : 'An Adventure puzzle with collected upgrades'} ja={ja}/>
      </article>
     </div>
    </section>
@@ -80,7 +80,7 @@ const legal = ja ? '/ja/' : '/';
   </main>
   <dialog class="image-dialog" aria-label={ja ? 'ゲーム画面を拡大' : 'Enlarged game screenshot'}>
    <form method="dialog"><button class="image-close" aria-label={ja ? '閉じる' : 'Close'} autofocus><span aria-hidden="true">×</span></button></form>
-   <img alt="" width="1242" height="2688" />
+   <img alt="" width="1206" height="2622" />
   </dialog>
   <script>
    import '../scripts/screenshots';

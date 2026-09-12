@@ -7,12 +7,12 @@
 .hero-description{font-size:17px;color:var(--muted);margin:0 0 28px;line-height:1.9;max-width:460px}
 .app-hero .store-details{font-size:14px;margin-top:12px}
 .hero-product{min-width:0}
-.hero-screens{display:flex;align-items:flex-start;gap:18px;position:relative;padding:10px 0 0;background:radial-gradient(ellipse at 45% 55%,#8c78ee24,transparent 70%)}
-.hero-phone{min-width:0;margin:0;width:53%;position:relative}
-.hero-phone-side{width:44%;padding-top:60px}
-/* Display the phone portion of existing store artwork; originals remain available on click. */
-.app-screen{display:block;overflow:hidden;aspect-ratio:0.56;border-radius:34px 34px 14px 14px;background:#202123;box-shadow:0 22px 48px #0005;position:relative;transition:transform .2s}
-.app-screen img{display:block;width:106%;max-width:none;height:auto;margin-left:-3%;margin-top:-43%}
+.hero-screens{display:flex;justify-content:center;align-items:flex-start;gap:18px;position:relative;padding:10px 0 0;background:radial-gradient(ellipse at 45% 55%,#8c78ee24,transparent 70%)}
+.hero-phone{min-width:0;margin:0;width:46%;position:relative}
+.hero-phone-side{width:40%;padding-top:60px}
+/* Show the full localized screenshot without cropping or changing its aspect ratio. */
+.app-screen{display:block;overflow:hidden;aspect-ratio:1206 / 2622;border-radius:28px;background:#202123;box-shadow:0 22px 48px #0005;position:relative;transition:transform .2s}
+.app-screen img{display:block;width:100%;max-width:100%;height:auto;margin:0}
 .app-screen:hover{transform:translateY(-4px)}
 .hero-phone figcaption{text-align:center;font-size:14px;line-height:1.6;margin-top:18px;color:#d0d4df}
 .screen-caption{text-align:center;color:#9aa4bb;font-size:12px;margin:14px 0 0}
