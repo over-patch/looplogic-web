@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+import LanguageSuggestion from './LanguageSuggestion.astro';
+
+interface Props {
+  lang: 'en' | 'ja';
+  kind: 'privacy' | 'terms';
+  source: string;
+}
+const { lang, kind, source } = Astro.props;
+const ja = lang === 'ja';
+const home = ja ? '/ja/' : '/';
+const alternatePath = `${ja ? '/' : '/ja/'}${kind}/`;
+const origin = 'https://looplogic.overpatch.dev';
+const canonical = `${origin}${home}${kind}/`;
+const title = source.match(/<title>([\s\S]*?)<\/title>/)?.[1];
+const document = source.match(/<h1>[\s\S]*?(?=<\/body>)/)?.[0];
+if (!title || !document) throw new Error(`Invalid legal source: ${kind}_${lang}`);
+// Only trusted, checked-in originals are rendered. Keep the policy text intact.
+const content = kind === 'privacy'
+  ? document.replace(/<(\/?)h3>/g, '<$1h2>').replace(/<(\/?)h4>/g, '<$1h3>')
+  : document;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={title} />
+    <meta name="theme-color" content="#080b18" />
+    <link rel="icon" href="/images/icon.png" type="image/png" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={`${origin}/${kind}/`} />
+    <link rel="alternate" hreflang="ja" href={`${origin}/ja/${kind}/`} />
+    <link rel="alternate" hreflang="x-default" href={`${origin}/${kind}/`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:url" content={canonical} />
+  </head>
+  <body>
+    <a class="skip" href="#main">{ja ? '本文へスキップ' : 'Skip to content'}</a>
+    <header class="site-header">
+      <div class="header wrap">
+        <a class="brand" href={home}><img src="/images/icon.png" width="40" height="40" alt="" /><span>Loop Logic</span></a>
+        <div class="header-actions">
+          <a class="language" href={alternatePath} lang={ja ? 'en' : 'ja'} data-language-choice={ja ? 'en' : 'ja'}>{ja ? 'EN' : '日本語'}</a>
+        </div>
+      </div>
+    </header>
+    <LanguageSuggestion lang={lang} alternatePath={alternatePath} />
+    <main id="main" class="legal wrap">
+      <article set:html={content} />
+    </main>
+    <footer class="footer wrap">
+      <a class="brand" href={home}>Loop Logic</a>
+      <nav class="footer-links" aria-label={ja ? '法務情報' : 'Legal'}>
+        <a href={`${home}privacy/`} aria-current={kind === 'privacy' ? 'page' : undefined}>{ja ? 'プライバシーポリシー' : 'Privacy policy'}</a>
+        <a href={`${home}terms/`} aria-current={kind === 'terms' ? 'page' : undefined}>{ja ? '利用規約' : 'Terms of use'}</a>
+      </nav>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .legal { max-width: 800px; padding-block: 56px 72px; font-size: 1rem; line-height: 1.85; overflow-wrap: anywhere; }
+  .legal :global(h1) { font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.5; letter-spacing: -.025em; margin-bottom: 24px; text-wrap: wrap; }
+  .legal :global(h2) { font-size: 1.4rem; margin-top: 40px; margin-bottom: 16px; text-wrap: wrap; }
+  .legal :global(h3) { font-size: 1.125rem; margin-top: 24px; text-wrap: wrap; }
+  .legal :global(p), .legal :global(li) { color: var(--muted); }
+  .legal :global(strong) { color: var(--text); }
+  .legal :global(ul) { padding-left: 1.5em; }
+  .legal :global(li) { margin-block: 8px; }
+  .legal :global(a) { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
+  .legal :global(hr) { border: 0; border-top: 1px solid var(--border); margin-block: 32px; }
+  .legal :global(footer) { border-top: 1px solid var(--border); margin-top: 48px; padding-top: 16px; font-size: .875rem; }
+  .footer-links [aria-current="page"] { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
+  @media (max-width: 720px) { .legal { padding-block: 32px 48px; } }
+</style>

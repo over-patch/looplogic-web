@@ -17,7 +17,7 @@ const c = ja ? {
  proof: [['No ads','Room to think'],['3 levels','Find your difficulty'],['30,000+','Puzzles to explore']], modesTitle: ['Settle into a puzzle.','Or rise to a challenge.'], standard: 'One puzzle at a time. At your pace.', standardText: 'Choose a board size and difficulty, then work your way through the stages. From compact grids to sprawling challenges, find a puzzle for your mood.', standardTags: ['4×4 to 16×20 grids','3 difficulty levels'], adventure: 'Add strategy to your logic.', adventureText: 'Choose buffs between stages and shape your own approach. Take on the daily challenge and compete for times on the rankings.', adventureTags: ['32 buffs','Daily challenge'], galleryLabel: 'Gameplay shown in current Japanese store images', endTitle: ['Your next move.','Your next adventure.'], endText: 'Bring your logic. Find your strategy. Download Loop Logic for free.', privacy: 'Privacy policy', terms: 'Terms of use', skip: 'Skip to content',
 };
 const canonical = `https://looplogic.overpatch.dev${ja ? '/ja/' : '/'}`;
-const legal = 'https://over-patch.github.io/overpatch-legal/looplogic/';
+const legal = ja ? '/ja/' : '/';
 ---
 <!doctype html>
 <html lang={lang}>
@@ -61,6 +61,6 @@ const legal = 'https://over-patch.github.io/overpatch-legal/looplogic/';
   <script>
    import '../scripts/screenshots';
   </script>
-  <footer class="footer wrap"><div><a class="brand" href={ja?'/ja/':'/'}>Loop Logic</a><p>© {new Date().getFullYear()} overpatch</p></div><div class="footer-links"><a href={`${legal}privacy_${lang}`}>{c.privacy}</a><a href={`${legal}terms_${lang}`}>{c.terms}</a></div></footer>
+  <footer class="footer wrap"><div><a class="brand" href={ja?'/ja/':'/'}>Loop Logic</a><p>© {new Date().getFullYear()} overpatch</p></div><div class="footer-links"><a href={`${legal}privacy/`}>{c.privacy}</a><a href={`${legal}terms/`}>{c.terms}</a></div></footer>
  </body>
 </html>

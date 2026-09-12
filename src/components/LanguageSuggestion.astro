@@ -1,12 +1,12 @@
 ---
-const { lang } = Astro.props;
+const { lang, alternatePath } = Astro.props;
 const target = lang === 'ja' ? 'en' : 'ja';
 ---
 <aside class="language-suggestion" data-language-suggestion hidden lang={target} aria-label={target === 'ja' ? '表示言語の選択' : 'Language preference'}>
   <div class="language-suggestion-inner wrap">
     <p>{target === 'ja' ? '日本語で表示しますか？' : 'Would you prefer English?'}</p>
     <div class="language-suggestion-actions">
-      <a href={target === 'ja' ? '/ja/' : '/'} data-language-choice={target}>{target === 'ja' ? '日本語で表示' : 'View in English'}</a>
+      <a href={alternatePath ?? (target === 'ja' ? '/ja/' : '/')} data-language-choice={target}>{target === 'ja' ? '日本語で表示' : 'View in English'}</a>
       <button type="button" data-language-dismiss aria-label={target === 'ja' ? '案内を閉じる' : 'Dismiss language suggestion'}>×</button>
     </div>
   </div>

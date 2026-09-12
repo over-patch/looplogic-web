@@ -26,7 +26,11 @@ When the displayed language differs from the visitor's saved choice or first sup
 
 The `.openai/hosting.json` manifest identifies the private Sites review deployment. The production canonical URLs intentionally target the planned domain, not the review origin. The custom production domain and DNS have not been activated by this change. Existing GitHub origin remains unchanged. `dist/` is a static build suitable for GitHub Pages as well as Sites.
 
-Legal links point to existing public Loop Logic policies. No new legal text is invented.
+Legal pages live at `/privacy/`, `/terms/`, `/ja/privacy/`, and `/ja/terms/`, following Owlaria's locale convention. Home-page footer links use these local routes.
+
+The four original HTML documents in `src/data/legal/` are byte-for-byte copies from https://github.com/over-patch/overpatch-legal/tree/0ee155d7e088af5f2ee7c6bb955fae95ca1d0910/looplogic (imported 2026-09-12). `LegalPage.astro` renders the original document from its first heading through its footer, preserving all policy wording, dates, and contact details. Only the surrounding site navigation and presentation change; privacy heading levels are normalized without changing their text. Language switches stay on the same document.
+
+The original GitHub Pages site and app/store links are unchanged. After the production domain is activated, app/store legal URLs can be updated separately; existing users can continue opening the old URLs.
 
 ## UI refinement (2026-09-12)
 
