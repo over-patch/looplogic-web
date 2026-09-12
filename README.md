@@ -1,7 +1,7 @@
 # Loop Logic Web
 
 Bilingual Astro product website for https://looplogic.overpatch.dev/.
-English lives at `/`; Japanese at `/ja/`, following Owlaria's URL convention.
+The root `/` automatically selects Japanese `/ja/` or English `/en/`. Explicit language URLs never auto-redirect.
 
 ## Development
 
@@ -20,8 +20,8 @@ The existing app icon is from the Loop Logic app repository. Gameplay screenshot
 `AppScreen.astro` selects the screenshot language using the page locale and shows the entire image at its native aspect ratio. Screenshots are non-interactive; no enlargement dialog is used. Replace the matching locale file to update a screenshot; preserve its dimensions or update the component dimensions and CSS aspect ratio if needed. The visible practice puzzle follows the hero and highlights. The hero’s “Try a puzzle” link starts the challenge directly.
 
 Shared content: `src/components/Home.astro`. Shared styling: `src/styles/global.css`.
-Both store destinations are explicit; there is no automatic platform or language redirect.
-When the displayed language differs from the visitor's saved choice or first supported browser language, a dismissible banner offers the other language. Unsupported browser languages fall back to English. Language selection and dismissal are remembered in localStorage on this browser; dismissal keeps the current language. Explicit URLs always remain accessible without redirects, and the header links work without JavaScript or browser storage. Switching preserves query parameters and the current section.
+Both store destinations are explicit; there is no automatic platform redirect.
+The root selects the saved manual choice first, then the first supported browser language, falling back to English. Detection runs in the head before content rendering and uses location.replace, preserving query parameters and section anchors. Without JavaScript the root shows English with working language links. Manual language switches use localStorage key `looplogic-language-choice`; the old banner preference is ignored because it also recorded dismissals. Language-specific URLs always stay in the requested language. Legal pages live under `/en/` and `/ja/`; previous `/privacy/` and `/terms/` URLs remain available as English aliases with canonical links to `/en/`.
 `data-store` and `data-placement` identify download links for a future analytics integration. No analytics collector is currently configured, and no download/conversion measurement is claimed.
 
 ## Publication

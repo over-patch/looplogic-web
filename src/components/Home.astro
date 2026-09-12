@@ -6,8 +6,8 @@ import AdventureStory from './AdventureStory.astro';
 import FirstLoop from './FirstLoop.astro';
 import AppScreen from './AppScreen.astro';
 import StoreLinks from './StoreLinks.astro';
-import LanguageSuggestion from './LanguageSuggestion.astro';
-const { lang = 'ja' } = Astro.props;
+import languageEntry from '../scripts/language-entry.js?raw';
+const { lang = 'ja', autoDetect = false } = Astro.props;
 const ja = lang === 'ja';
 const c = ja ? {
  title: 'Loop Logic — スマホで遊ぶ、スリザーリンク × アドベンチャー',
@@ -16,26 +16,27 @@ const c = ja ? {
  title: 'Loop Logic — Slitherlink for iOS & Android',
  description: 'Turn numbers into one satisfying loop. An ad-free mobile logic puzzle with over 30,000 puzzles and an Adventure Mode where your upgrades shape each run. Free download for iOS and Android.',
 };
-const canonical = `https://looplogic.overpatch.dev${ja ? '/ja/' : '/'}`;
-const legal = ja ? '/ja/' : '/';
+const canonical = `https://looplogic.overpatch.dev${ja ? '/ja/' : '/en/'}`;
+const legal = ja ? '/ja/' : '/en/';
 ---
 <!doctype html>
 <html lang={lang}>
  <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  {autoDetect && <script is:inline set:html={languageEntry} />}
   <title>{c.title}</title><meta name="description" content={c.description} /><meta name="theme-color" content="#080b18" />
   <link rel="icon" href="/images/icon.png" type="image/png" /><link rel="canonical" href={canonical} />
-  <link rel="alternate" hreflang="ja" href="https://looplogic.overpatch.dev/ja/" /><link rel="alternate" hreflang="en" href="https://looplogic.overpatch.dev/" /><link rel="alternate" hreflang="x-default" href="https://looplogic.overpatch.dev/" />
+  <link rel="alternate" hreflang="ja" href="https://looplogic.overpatch.dev/ja/" /><link rel="alternate" hreflang="en" href="https://looplogic.overpatch.dev/en/" /><link rel="alternate" hreflang="x-default" href="https://looplogic.overpatch.dev/" />
   <meta property="og:type" content="website" /><meta property="og:title" content={c.title} /><meta property="og:description" content={c.description} /><meta property="og:url" content={canonical} />
  </head>
  <body>
   <a class="skip" href="#main">{ja ? '本文へスキップ' : 'Skip to content'}</a>
   <header class="site-header"><div class="header wrap">
-   <a class="brand" href={ja ? '/ja/' : '/'} aria-label="Loop Logic"><img src="/images/icon.png" width="40" height="40" alt="" /><span>Loop Logic</span></a>
+   <a class="brand" href={ja ? '/ja/' : '/en/'} aria-label="Loop Logic"><img src="/images/icon.png" width="40" height="40" alt="" /><span>Loop Logic</span></a>
    <nav aria-label={ja ? 'メインナビゲーション' : 'Main navigation'}><a href="#how">{ja ? '遊び方' : 'How to play'}</a><a href="#adventure">{ja ? 'アドベンチャー' : 'Adventure'}</a></nav>
-   <div class="header-actions"><a class="language" href={ja ? '/' : '/ja/'} lang={ja ? 'en' : 'ja'} data-language-choice={ja ? 'en' : 'ja'}>{ja ? 'EN' : '日本語'}</a><a class="small-cta" href="#download">{ja ? 'ダウンロード' : 'Download'}</a></div>
+   <div class="header-actions"><a class="language" href={ja ? '/en/' : '/ja/'} lang={ja ? 'en' : 'ja'} data-language-choice={ja ? 'en' : 'ja'}>{ja ? 'EN' : '日本語'}</a><a class="small-cta" href="#download">{ja ? 'ダウンロード' : 'Download'}</a></div>
   </div></header>
-  <LanguageSuggestion lang={lang} />
+  <script>import '../scripts/language-choice';</script>
   <main id="main" class="app-home">
    <section class="app-hero wrap" aria-labelledby="hero-title">
     <div class="app-hero-copy">
@@ -78,6 +79,6 @@ const legal = ja ? '/ja/' : '/';
    <AdventureStory ja={ja} />
    <section id="download" class="download section wrap"><img src="/images/icon.png" width="76" height="76" alt="" loading="lazy" /><p class="eyebrow">LOOP LOGIC</p><h2>{ja ? '次のひらめきを、' : 'Find your next spark.'}<br/>{ja ? 'Loop Logicで。' : 'With Loop Logic.'}</h2><p>{ja ? '一問から、無料で始めよう。' : 'Start with one puzzle. Download for free.'}</p><StoreLinks ja={ja} placement="footer" /></section>
   </main>
-  <footer class="footer wrap"><div><a class="brand" href={ja?'/ja/':'/'}>Loop Logic</a><p>© {new Date().getFullYear()} overpatch</p></div><div class="footer-links"><a href={`${legal}privacy/`}>{ja ? 'プライバシーポリシー' : 'Privacy policy'}</a><a href={`${legal}terms/`}>{ja ? '利用規約' : 'Terms of use'}</a></div></footer>
+  <footer class="footer wrap"><div><a class="brand" href={ja?'/ja/':'/en/'}>Loop Logic</a><p>© {new Date().getFullYear()} overpatch</p></div><div class="footer-links"><a href={`${legal}privacy/`}>{ja ? 'プライバシーポリシー' : 'Privacy policy'}</a><a href={`${legal}terms/`}>{ja ? '利用規約' : 'Terms of use'}</a></div></footer>
  </body>
 </html>

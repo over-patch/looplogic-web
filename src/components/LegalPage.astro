@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import LanguageSuggestion from './LanguageSuggestion.astro';
+
 
 interface Props {
   lang: 'en' | 'ja';
@@ -9,8 +9,8 @@ interface Props {
 }
 const { lang, kind, source } = Astro.props;
 const ja = lang === 'ja';
-const home = ja ? '/ja/' : '/';
-const alternatePath = `${ja ? '/' : '/ja/'}${kind}/`;
+const home = ja ? '/ja/' : '/en/';
+const alternatePath = `${ja ? '/en/' : '/ja/'}${kind}/`;
 const origin = 'https://looplogic.overpatch.dev';
 const canonical = `${origin}${home}${kind}/`;
 const title = source.match(/<title>([\s\S]*?)<\/title>/)?.[1];
@@ -31,9 +31,9 @@ const content = kind === 'privacy'
     <meta name="theme-color" content="#080b18" />
     <link rel="icon" href="/images/icon.png" type="image/png" />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={`${origin}/${kind}/`} />
+    <link rel="alternate" hreflang="en" href={`${origin}/en/${kind}/`} />
     <link rel="alternate" hreflang="ja" href={`${origin}/ja/${kind}/`} />
-    <link rel="alternate" hreflang="x-default" href={`${origin}/${kind}/`} />
+    <link rel="alternate" hreflang="x-default" href={`${origin}/en/${kind}/`} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:url" content={canonical} />
@@ -48,7 +48,7 @@ const content = kind === 'privacy'
         </div>
       </div>
     </header>
-    <LanguageSuggestion lang={lang} alternatePath={alternatePath} />
+    <script>import '../scripts/language-choice';</script>
     <main id="main" class="legal wrap">
       <article set:html={content} />
     </main>
