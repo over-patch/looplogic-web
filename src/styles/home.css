@@ -11,9 +11,9 @@
 .hero-phone{min-width:0;margin:0;width:46%;position:relative}
 .hero-phone-side{width:40%;padding-top:60px}
 /* Show the full localized screenshot without cropping or changing its aspect ratio. */
-.app-screen{display:block;overflow:hidden;aspect-ratio:1206 / 2622;border-radius:28px;background:#202123;box-shadow:0 22px 48px #0005;position:relative;transition:transform .2s}
+.app-screen{display:block;overflow:hidden;aspect-ratio:1206 / 2622;border-radius:28px;background:#202123;box-shadow:0 22px 48px #0005;position:relative}
 .app-screen img{display:block;width:100%;max-width:100%;height:auto;margin:0}
-.app-screen:hover{transform:translateY(-4px)}
+
 .hero-phone figcaption{text-align:center;font-size:14px;line-height:1.6;margin-top:18px;color:#d0d4df}
 .screen-caption{text-align:center;color:#9aa4bb;font-size:12px;margin:14px 0 0}
 .app-proof{display:grid;grid-template-columns:repeat(3,1fr);list-style:none;padding:26px 0;margin-block:0;border-block:1px solid var(--border)}
@@ -42,4 +42,7 @@
  .app-home .download{padding-block:44px}.app-home .download h2{font-size:30px}.app-home .download>img{width:56px;height:56px;margin-bottom:18px}
 }
 @media(max-width:360px){.app-proof strong{font-size:17px}.app-proof li>span{font-size:11px}.mode-card{gap:12px;padding:20px 14px;grid-template-columns:1.15fr .8fr}.mode-card h3{font-size:23px}.hero-phone figcaption{font-size:11px}.app-hero h1{font-size:31px}}
-@media(prefers-reduced-motion:reduce){.app-screen,.adventure-details summary>span{transition:none}.app-screen:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.adventure-details summary>span{transition:none}}
+
+.phone-handoff{display:none}
+@media(min-width:900px){.phone-handoff{display:block;margin:32px auto 0;max-width:480px}.phone-handoff>p{font-size:15px;color:var(--muted);margin:0 0 20px}.handoff-codes{display:flex;justify-content:center;gap:32px}.handoff-code{margin:0;display:flex;flex-direction:column;align-items:center;gap:12px}.handoff-code img{width:180px;height:180px;background:#fff;border-radius:8px}.handoff-code figcaption{font-size:14px;color:var(--text);line-height:1.6}}

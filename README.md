@@ -17,7 +17,7 @@ Public claims were checked against the official Apple and Google store listings 
 
 The existing app icon is from the Loop Logic app repository. Gameplay screenshots supplied on 2026-09-13 are stored as original 1206×2622 PNGs under `public/images/screenshots/{ja,en}/`: `standard.png` (completed Standard puzzle), `adventure.png` (Adventure gameplay), and `buffs.png` (buff selection). The six files were moved from `sozai/` and renamed without modifying their contents. The previous three store-marketing JPEGs were deleted.
 
-`AppScreen.astro` selects the screenshot language using the page locale and shows the entire image at its native aspect ratio. Clicking opens the original in the image dialog. Replace the matching locale file to update a screenshot; preserve its dimensions or update the component dimensions and CSS aspect ratio if needed. The visible practice puzzle follows the hero and highlights. The hero’s “Try a puzzle” link starts the challenge directly.
+`AppScreen.astro` selects the screenshot language using the page locale and shows the entire image at its native aspect ratio. Screenshots are non-interactive; no enlargement dialog is used. Replace the matching locale file to update a screenshot; preserve its dimensions or update the component dimensions and CSS aspect ratio if needed. The visible practice puzzle follows the hero and highlights. The hero’s “Try a puzzle” link starts the challenge directly.
 
 Shared content: `src/components/Home.astro`. Shared styling: `src/styles/global.css`.
 Both store destinations are explicit; there is no automatic platform or language redirect.
@@ -40,12 +40,16 @@ The original GitHub Pages site and app/store links are unchanged. After the prod
 - Badge sources: https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg ; https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp ; https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png . Artwork is preserved without modification.
 - The hero's direct practice link starts the optional puzzle. The existing pause, reset, hints and two puzzles are preserved.
 - Adventure introduction consolidates the repeated bridge and journey explanation. Store badges appear in both the hero and final download section; the sticky header provides access from anywhere on the page.
-- Store screenshots open a native dialog, support Escape, restore focus and remain ordinary image links without JavaScript. Mobile screenshots use horizontal scroll snap.
+- Screenshots are now non-interactive; the former enlargement dialog and its script have been removed.
 - Global and Adventure styles are consolidated; practice edge targets have a 44px minimum short side. The main page was checked at 320, 390, 768 and 1280px widths across both locales.
 
 ## App-first redesign (2026-09-13)
 
-- Japanese and English home pages lead with explicit iOS/Android app positioning, store badges, and two gameplay screens. Localized screenshots are displayed without cropping and can be enlarged.
+- Japanese and English home pages lead with explicit iOS/Android app positioning, store badges, and two gameplay screens. Localized screenshots are displayed without cropping and remain non-interactive.
 - Standard and Adventure modes are presented together near the top, each with gameplay imagery. Adventure introduces buffs in plain language alongside the localized buff selection screen.
 - Detailed buff combinations, the four-stage example, and challenge limits remain available in a native disclosure. The repeated three-step tutorial is replaced by a visible playable demo near the top, preserving both puzzles, hints, pause, reset, and direct `#try-puzzle` links.
 - Presentation changes are scoped to `src/styles/home.css`. Legal documents, store destinations, and language selection are preserved. Each language displays its own screenshots.
+
+## Phone handoff
+
+Desktop download sections (900px and wider) include separate App Store and Google Play QR codes in `public/images/qr/`. They encode the same direct store URLs as the badges, with Japanese/US App Store destinations selected by page language. They never point to the private review site. Mobile retains the store badges without QR codes. Regenerate with `scripts/generate-store-qr.py` using Python `qrcode==8.2`; generated SVG files are committed, so the app has no QR runtime dependency.

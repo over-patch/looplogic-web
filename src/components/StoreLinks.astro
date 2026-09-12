@@ -13,4 +13,5 @@ const locale = ja ? 'ja' : 'en';
   </a>
  </div>
  <p class="store-details">{ja ? '無料ダウンロード・アプリ内課金あり' : 'Free download · In-app purchases'}</p>
+ {placement === 'footer' && <div class="phone-handoff"><p>{ja ? 'スマホのカメラで読み取って、アプリをダウンロード' : 'Scan with your phone’s camera to download the app'}</p><div class="handoff-codes"><figure class="handoff-code"><img src={`/images/qr/app-store-${locale}.svg`} width="180" height="180" loading="lazy" alt={ja ? 'iPhone・iPad用：Loop LogicのApp Storeページを開くQRコード' : 'QR code to open Loop Logic on the App Store for iPhone and iPad'}/><figcaption>iPhone / iPad</figcaption></figure><figure class="handoff-code"><img src="/images/qr/google-play.svg" width="180" height="180" loading="lazy" alt={ja ? 'Android用：Loop LogicのGoogle Playページを開くQRコード' : 'QR code to open Loop Logic on Google Play for Android'}/><figcaption>Android</figcaption></figure></div></div>}
 </div>
