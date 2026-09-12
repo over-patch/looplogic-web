@@ -26,7 +26,7 @@
 .tutorial-progress{font-size:17px!important;font-weight:550;color:#e4dffa!important;letter-spacing:0;margin:0 0 7px!important;line-height:1.5}
 .tutorial.has-mistake .tutorial-progress{color:#ffb7bd!important}
 .tutorial-instructions>p:last-child{font-size:14px;line-height:1.7;color:#a6afc3;margin:0}
-.tutorial-actions{display:flex;gap:12px;justify-content:space-between;margin:19px 0 8px}.tutorial-actions[hidden]{display:none}
+.tutorial-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;margin:19px 0 8px}.tutorial-actions[hidden]{display:none}
 .tutorial-actions button{font:inherit;font-size:14px;min-height:44px;padding:10px 20px;border-radius:10px;cursor:pointer;background:transparent;border:1px solid #ffffff20;color:#b9c0d6;transition:background .2s}
 .tutorial-actions [data-next]{background:#e3ddfa;color:#252039;border:0;min-width:130px;box-shadow:inset 0 1px #fff8}
 .tutorial-actions button:disabled{opacity:.4;cursor:default}
@@ -49,4 +49,5 @@
 
 /* Keep the complete demo and its actions within a laptop viewport. */
 .tutorial{padding:20px 24px}.tutorial-board{max-width:288px;margin:8px auto 12px}.tutorial-instructions{min-height:72px}.tutorial-actions{margin:12px 0 0}.tutorial .board-top{padding-bottom:12px;letter-spacing:0}.tutorial-progress{font-size:16px!important}.tutorial-edge.horizontal{height:44px}.tutorial-edge.vertical{width:44px}
-@media(max-width:720px){.tutorial{padding:18px}.tutorial-board{max-width:320px}.tutorial-clue{font-size:27px}.tutorial-actions button{padding-inline:15px}.tutorial-instructions{min-height:72px}}
+@media(max-width:720px){.tutorial{padding:18px}.tutorial-board{max-width:320px}.tutorial-clue{font-size:27px}.tutorial-actions{gap:6px}.tutorial-actions button{padding-inline:6px}.tutorial-actions [data-next]{min-width:0;flex-grow:1}.tutorial-instructions{min-height:72px}}
+@media(max-width:380px){.tutorial[data-lang=en] .tutorial-actions button{font-size:13px}}
