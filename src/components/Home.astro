@@ -5,6 +5,7 @@ import AdventureStory from './AdventureStory.astro';
 import FirstLoop from './FirstLoop.astro';
 import StoreLinks from './StoreLinks.astro';
 import Screenshot from './Screenshot.astro';
+import LanguageSuggestion from './LanguageSuggestion.astro';
 const { lang = 'ja' } = Astro.props;
 const ja = lang === 'ja';
 const c = ja ? {
@@ -33,12 +34,12 @@ const legal = 'https://over-patch.github.io/overpatch-legal/looplogic/';
   <header class="site-header"><div class="header wrap">
    <a class="brand" href={ja ? '/ja/' : '/'} aria-label="Loop Logic"><img src="/images/icon.png" width="40" height="40" alt="" /><span>Loop Logic</span></a>
    <nav aria-label={ja ? 'メインナビゲーション' : 'Main navigation'}><a href="#how">{c.nav[0]}</a><a href="#adventure">{c.nav[1]}</a></nav>
-   <div class="header-actions"><a class="language" href={ja ? '/' : '/ja/'} lang={ja ? 'en' : 'ja'}>{ja ? 'EN' : '日本語'}</a><a class="small-cta" href="#download">{c.nav[2]}</a></div>
+   <div class="header-actions"><a class="language" href={ja ? '/' : '/ja/'} lang={ja ? 'en' : 'ja'} data-language-choice={ja ? 'en' : 'ja'}>{ja ? 'EN' : '日本語'}</a><a class="small-cta" href="#download">{c.nav[2]}</a></div>
   </div></header>
+  <LanguageSuggestion lang={lang} />
   <main id="main">
    <section class="hero wrap">
     <div class="hero-copy"><p class="eyebrow">{c.eyebrow}</p><h1>{c.headline[0]}<br /><span>{c.headline[1]}</span></h1><p class="intro">{c.intro}</p>
-     <a class="explore-link" href="#try-puzzle" data-start-puzzle>{ja ? 'ブラウザで、一問遊んでみる' : 'Try a puzzle in your browser'}<span aria-hidden="true"> ↗</span></a>
 
     </div>
     <FirstLoop ja={ja} />

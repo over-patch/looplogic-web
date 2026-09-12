@@ -19,6 +19,7 @@ The existing app icon is from the Loop Logic app repository. The three JPEGs are
 
 Shared content: `src/components/Home.astro`. Shared styling: `src/styles/global.css`.
 Both store destinations are explicit; there is no automatic platform or language redirect.
+When the displayed language differs from the visitor's saved choice or first supported browser language, a dismissible banner offers the other language. Unsupported browser languages fall back to English. Language selection and dismissal are remembered in localStorage on this browser; dismissal keeps the current language. Explicit URLs always remain accessible without redirects, and the header links work without JavaScript or browser storage. Switching preserves query parameters and the current section.
 `data-store` and `data-placement` identify download links for a future analytics integration. No analytics collector is currently configured, and no download/conversion measurement is claimed.
 
 ## Publication

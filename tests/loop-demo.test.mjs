@@ -57,7 +57,11 @@ assert.equal(status.excessEdges.size,0);assert.equal(status.branchEdges.size,0);
 console.log('PASS: excess cell/edge feedback, recovery after undo, branching and solved-board feedback.');
 
 const {previewFrames}=await import('../src/data/loop-demo.ts');
+assert.deepEqual(demo.clues,[[null,2,null],[3,0,1],[2,null,null]],'Use the requested beginner demo board');
+assert.deepEqual(demoStart,[],'Demo must start empty');
 assert.equal(previewFrames[0].edge,null,'Preview must start with zero drawn lines');
+assert.deepEqual(previewFrames.slice(1,4).map(frame=>frame.edge),['h-1-0','v-1-0','h-2-0'],'Start with the three edges of 3 away from 0');
+assert(previewFrames.slice(1).every(frame=>!cellEdges(1,1).includes(frame.edge)),'Never draw around 0');
 const previewLines=new Set();
 for(const frame of previewFrames.slice(1)){assert(frame.edge);assert(!previewLines.has(frame.edge));previewLines.add(frame.edge);}
 assert.deepEqual(previewLines,new Set(demo.solution));
