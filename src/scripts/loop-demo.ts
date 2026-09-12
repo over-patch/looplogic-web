@@ -3,6 +3,7 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(root=>{
  const ja=root.dataset.lang==='ja',choose=(a:string,b:string)=>ja?a:b;
  const buttons=[...root.querySelectorAll<HTMLButtonElement>('[data-edge]')];
  const next=root.querySelector<HTMLButtonElement>('[data-next]')!,reset=root.querySelector<HTMLButtonElement>('[data-reset]')!;
+ const pause=root.querySelector<HTMLButtonElement>('[data-pause]')!;
  const instruction=root.querySelector<HTMLElement>('[data-instruction]')!,progress=root.querySelector<HTMLElement>('[data-progress]')!;
  let mode:'watch'|'play'|'done'='watch',beat=0,round=0,visible=false;
  let paused=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -50,6 +51,7 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(root=>{
   const puzzle=mode==='watch'?demo:challenges[round];
   const status=feedback(placed,puzzle.clues);
   root.dataset.mode=mode;
+  pause.hidden=mode!=='watch';
   root.classList.toggle('has-mistake',mode==='play'&&(status.excessCells.size>0||status.branchEdges.size>0));
   const score=root.querySelector<HTMLElement>('[data-score]');
   if(score){score.hidden=mode==='watch';score.textContent=mode==='watch'?'':mode==='done'?'CLEAR':`${status.satisfied} / ${status.total}`;}
@@ -63,7 +65,7 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(root=>{
   });
   buttons.forEach(b=>{const e=b.dataset.edge!;const newlyDrawn=mode==='watch'&&previewFrames[beat].edge===e&&b.dataset.state!=='line';b.classList.toggle('is-new-line',newlyDrawn);b.dataset.state=placed.has(e)?'line':'empty';b.disabled=mode!=='play';b.classList.remove('is-fixed');b.setAttribute('aria-pressed',String(placed.has(e)));const invalid=mode==='play'&&(status.excessEdges.has(e)||status.branchEdges.has(e));b.classList.toggle('is-error',invalid);b.setAttribute('aria-label',baseLabels.get(b)!+choose(placed.has(e)?'、線あり':'、線なし',placed.has(e)?', line drawn':', no line')+(invalid?choose('、つながりを見直してください',', check this connection'):''));});
  };
- const schedule=()=>{stop();if(mode==='watch'&&beat<finalBeat&&!paused&&visible&&!document.hidden)timer=setTimeout(()=>{beat++;watch();},beat===1||beat===2?900:2200);};
+ const schedule=()=>{stop();if(mode==='watch'&&beat<finalBeat&&!paused&&visible&&!document.hidden)timer=setTimeout(()=>{beat++;watch();},beat===0?600:beat===1||beat===2?900:2200);};
  const watch=()=>{
   if(beat===0){demoCelebrated=false;root.querySelector('.puzzle-confetti')?.remove();}
   placed.clear();
@@ -72,7 +74,10 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(root=>{
   instruction.textContent=choose(previewFrames[beat].ja,previewFrames[beat].en);
   if(beat===finalBeat&&!demoCelebrated){demoCelebrated=true;celebrate();}
   reset.disabled=false;
-  reset.textContent=beat===finalBeat?choose('もう一度見る','Watch again'):paused?choose('再生','Play'):choose('一時停止','Pause');next.textContent=choose('一問、遊んでみる','Try a puzzle');schedule();
+  reset.textContent=choose('最初から','Restart');
+  pause.disabled=beat===finalBeat;
+  pause.textContent=paused?choose('再生','Play'):choose('一時停止','Pause');
+  next.textContent=choose('遊んでみる','Try a puzzle');schedule();
  };
  const invite=(n:number)=>{
   stop();root.querySelector('.puzzle-confetti')?.remove();round=n;mode='play';placed.clear();buttons.forEach(b=>b.classList.remove('is-target'));draw();
@@ -97,9 +102,13 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(root=>{
   instruction.textContent=wrong?choose('光っている線を、外してみよう。','Try removing the highlighted line.'):choose('光っている辺に、線を引いてみよう。','Try drawing the highlighted edge.');
  });
  reset.addEventListener('click',()=>{
-  if(mode==='watch'){if(beat===finalBeat){beat=0;paused=false;}else paused=!paused;watch();}
+  if(mode==='watch'){beat=0;paused=false;watch();}
   else if(mode==='play'){invite(round);next.focus();}
   else{mode='watch';beat=0;paused=matchMedia('(prefers-reduced-motion: reduce)').matches;watch();}
+ });
+ pause.addEventListener('click',()=>{
+  if(mode!=='watch'||beat===finalBeat)return;
+  paused=!paused;watch();
  });
  buttons.forEach(b=>b.addEventListener('click',()=>{
   if(mode!=='play')return;
