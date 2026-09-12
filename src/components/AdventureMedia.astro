@@ -1,6 +1,24 @@
 ---
-import Screenshot from './Screenshot.astro';
-interface Props { ja: boolean; videoSrc?: string; poster?: string; captionsSrc?: string; }
-const { ja, videoSrc, poster, captionsSrc } = Astro.props;
+import { adventureBuffs, adventureRun } from '../data/adventure-run';
+interface Props { ja: boolean; }
+const { ja } = Astro.props;
+const l = ja ? 0 : 1;
 ---
-    <figure class="adventure-preview" data-media-slot="adventure-hero">{videoSrc ? <video controls playsinline preload="none" poster={poster} aria-label={ja ? "アドベンチャーモードの紹介動画" : "Adventure Mode introduction"}><source src={videoSrc} type="video/mp4" />{captionsSrc && <track kind="captions" src={captionsSrc} srclang={ja ? "ja" : "en"} label={ja ? "日本語" : "English"} default />}</video> : <div class="preview-screens"><Screenshot src="/images/buffs.jpg" ja={ja} alt={ja ? 'バフを選ぶ画面' : 'Choose a buff (Japanese)'} /><Screenshot src="/images/adventure.jpg" ja={ja} alt={ja ? 'アドベンチャーの攻略画面' : 'Adventure gameplay (Japanese)'} /></div>}</figure>
+<div class="run-example" data-adventure-run>
+ <div class="run-example-heading"><p class="eyebrow">ONE POSSIBLE RUN</p><span>{ja ? 'あるランの選択例' : 'An example build'}</span></div>
+ <div class="run-navigation" aria-label={ja ? '選択例のステージを切り替える' : 'Explore the stages of this example'} hidden>
+  {adventureRun.map((_,i)=><button type="button" data-run-stage={i} aria-controls={`run-stage-${i}`} aria-pressed={i===0?'true':'false'}><span>STAGE</span><strong>0{i+1}</strong></button>)}
+ </div>
+ <div class="run-panels">{adventureRun.map((stage,i)=><section id={`run-stage-${i}`} data-run-panel={i} aria-labelledby={`run-title-${i}`}>
+  <p class="run-step-label">STAGE 0{i+1} / 04</p><h3 id={`run-title-${i}`}>{stage.title[l]}</h3>
+  <p class="run-options-label">{ja ? '提示された3択' : 'Three offered buffs'}</p>
+  <ul class="run-options">{stage.options.map(key=>{const buff=adventureBuffs[key]; return <li class:list={{'is-picked':key===stage.pick}}><span class="buff-mark" aria-hidden="true">{buff.mark}</span><div><span class="buff-tier">TIER {buff.tier}</span><strong>{ja?buff.ja:buff.en}</strong></div>{key===stage.pick&&<span class="picked-label">{ja?'選択':'Picked'}</span>}</li>})}</ul>
+  <p class="run-reason">{stage.reason[l]}</p>
+  <div class="run-build"><p>{ja ? 'このステージに持ち込むバフ' : 'Your build for this stage'}</p><ul>{stage.build.map(key=><li>{ja?adventureBuffs[key].ja:adventureBuffs[key].en}</li>)}</ul><p class="run-effect">{stage.effect[l]}</p></div>
+ </section>)}</div>
+ <div class="run-result"><span>{ja ? '4ステージのクリアタイムを合計' : 'Add the clear times of all 4 stages'}</span><strong>{ja ? '合計タイムで、月間ランキングへ。' : 'One total time. The monthly leaderboard.'}</strong></div>
+ <p class="run-note">{ja ? '仕組みを伝えるための選択例です。実際の画面・抽選の再現ではありません。候補はランダムで、毎回この組み合わせが出るとは限りません。' : 'An illustration of one possible build, not the actual game UI or a simulated draw. Buffs are offered at random; this combination is not guaranteed.'}</p>
+</div>
+<script>
+ import '../scripts/adventure-run';
+</script>

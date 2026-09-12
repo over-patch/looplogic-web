@@ -6,21 +6,22 @@ The first viewport introduces the basic puzzle with the app’s actual 3×3 tuto
 
 The three buff names and qualitative effects appear in the current Japanese store selection image and are corroborated by the app's localized buff descriptions. The page deliberately avoids exact line counts, probabilities, timing, stacking claims, or promises that these three choices always appear together. Diagrams explicitly identify themselves as explanations, not product UI. Standard puzzle count and daily/ranking claims come from the official store descriptions already recorded in README.
 
-## Video handoff
+## Adventure run explanation (2026-09-12)
 
-`src/components/AdventureMedia.astro` is the replaceable Adventure section media slot. It currently renders existing store images. When the real recording is ready, supply `videoSrc`, `poster`, and locale-specific `captionsSrc` to the component in AdventureStory.astro. Supply an MP4, a poster and WebVTT captions under public/media. Native playback controls are enabled; playback does not start automatically. There is no dummy play button or unfinished video placeholder.
+Adventure now leads with random drafting, a persistent build over four stages, and total clear time on a monthly leaderboard. Store posters have been replaced with a localized, four-stage example in `AdventureMedia.astro`. Stage buttons reveal a curated route; without JavaScript all four stages are readable. The example is explicitly labeled as illustrative and does not simulate random draws or report invented times. Supporting copy explains upgrades, limited rerolls, and the Stage Skip trade-off. The top viewport links directly to Adventure.
 
-Suggested 15–25 second recording sequence:
-1. Complete the final few lines of a real puzzle and show the clear.
-2. Show the actual next buff choices; briefly explain one selected effect in captions.
-3. Enter the next stage and show the effect (for example, correct starting lines).
-4. Show the next puzzle in progress. End on a real gameplay moment rather than an invented victory or score.
+Source evidence in the sibling `looplogic` app:
+- `app/(tabs)/adventure/index.tsx`: daily runs start at stage 1 of 4; daily limits and Legend training access.
+- `app/(screens)/(adventure)/buff-selection.tsx`: three options, one selection, rerolls, acquired-buff carryover, replacement on upgrade, loss of earlier buffs on Stage Skip.
+- `src/features/looplogic/utils/buffUtils.ts`: random weighted draws; later stages favor higher tiers; prerequisites; Stage Skip only at stages 2 and 3.
+- `src/features/looplogic/data/buffs.ts`: example IDs/tiers and upgrade chains; Stage Skip requires Buff Reroll Increase.
+- `app/(screens)/(adventure)/play.tsx`: cumulative clear time passed between stages and submitted on completion.
+- `src/features/looplogic/utils/rankingService.ts`: run times stored for monthly rankings.
+- `src/locales/{ja,en}/buffs.json` and `game.json`: localized names and mode descriptions.
 
-Capture current release UI. Provide each locale's captions. The website explains the sequence independently of video. The interactive tutorial requires JavaScript; the surrounding rules and marketing content remain readable without it. Diagrams respect reduced-motion settings.
+The example follows a valid possible route: Correct Lines Start → its Lv2 replacement → Extra Hints Start → Board Size Reduction. Actual draws are random, and no probability, exact time saving, or shared daily puzzle is promised. Daily attempts are distinguished from monthly rankings. The old “32 special effects” copy is removed because the master list includes multiple levels of the same effect.
 
-## Remaining
-
-Replace store marketing images with the prepared footage/screenshots. Connect an agreed analytics provider before claiming click measurement. Production domain setup remains separate from local content changes.
+Future actual recordings can supplement this explanation with locale-matched app footage. Production domain setup remains separate.
 
 ## Guided board
 

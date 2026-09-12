@@ -1,31 +1,30 @@
 ---
 import AdventureMedia from './AdventureMedia.astro';
 const { ja } = Astro.props;
-const buffs = ja ? [
- ['正解線スタート','最初の一手に、足がかりを。','開始時に一部の正解線を配置。確かな線を起点に、周りのマスを読み解いていく。','line'],
- ['追加ヒントスタート','数字から、答えを探したい。','開始時に隠れた数字のヒントを追加。手がかりを増やして、自分の論理で線をつなぐ。','clue'],
- ['ミス防止シールド','間違いに、早く気づきたい。','誤って引いた線を、一定時間後に×へ変換。回数制限のあるサポートで攻略を助ける。','shield'],
+const decisions = ja ? [
+ ['01 / BUILD', '今の助けを、次の強さへ。', '獲得したバフは次のステージへ持ち越し。正解線スタートを取ると、その上位版が候補に加わります。別の効果を足すか、今の強みを伸ばすか。'],
+ ['02 / REROLL', 'この3択で決める？ 引き直す？', '欲しいバフが出るとは限りません。回数制限のあるリロールで候補を引き直すか、今ある選択肢で攻略を組み立てるかも腕の見せどころ。'],
+ ['03 / TRADE-OFF', '育てたバフを、手放す選択も。', '「バフリロール増加」を持っていると、ステージ2・3では「ステージスキップ」が出る可能性も。ステージを飛ばす代わりに、それまでのバフをすべて失います。'],
 ] : [
- ['Correct Lines Start','A foothold for your first move.','Begin with some correct lines already placed. Use those certain edges to reason through neighboring cells.','line'],
- ['Extra Hint Start','More clues to reason from.','Reveal additional hidden number clues at the start. Connect the lines using your own logic.','clue'],
- ['Miss Prevention Shield','Catch a wrong turn sooner.','An incorrect line becomes a cross after a delay. This support has a limited number of uses.','shield'],
+ ['01 / BUILD', 'Turn an early pick into a stronger build.', 'Carry buffs into the next stage. Pick Correct Lines Start and its upgrade can appear later. Add a different effect, or strengthen what you already have?'],
+ ['02 / REROLL', 'Take a pick. Or take another chance.', 'The buff you want may not appear. With limited rerolls, decide whether to redraw the three choices or make the most of the options in front of you.'],
+ ['03 / TRADE-OFF', 'Give up your build to skip a stage?', 'With Buff Reroll Increase, Stage Skip can appear in stages 2 and 3. It lets you skip a stage, but costs you every buff you have collected so far.'],
 ];
 ---
-<section id="adventure" class="adventure-story section">
+<section id="adventure" class="adventure-story section" aria-labelledby="adventure-title">
  <div class="wrap">
-  <div class="adventure-intro-layout"><div class="story-heading"><p class="eyebrow">ADVENTURE MODE</p><h2>{ja ? '解くだけじゃない。' : 'More than solving.'}<br/><span>{ja ? '選ぶたび、攻略が変わる。' : 'Every choice shapes your approach.'}</span></h2><p>{ja ? 'ループを解く。バフを選ぶ。次のステージへ。32種類の特殊効果との出会いが、いつものパズルに戦略を加えます。' : 'Solve a loop. Choose a buff. Take on the next stage. Discover 32 special effects that add a little strategy to every puzzle.'}</p></div>
-  <AdventureMedia ja={ja} /></div>
-  <div class="buff-heading"><p class="eyebrow">CHOOSE YOUR APPROACH</p><h3>{ja ? '次の一問、どんな助けを選ぶ？' : 'What would help you solve the next puzzle?'}</h3></div>
-  <div class="buff-examples">{buffs.map(([name,title,description,type],i)=><article class={`buff-example ${type}`}>
-   <div class="buff-visual" aria-hidden="true"><svg viewBox="0 0 200 120">
-    {[35,85,135,185].map(x=>[15,65,115].map(y=><circle cx={x-10} cy={y-5} r="2" fill="#8791b3"/>))}
-    <text x="50" y="40">2</text><text x="100" y="90">1</text><text x="150" y="40">3</text>
-    {type==='line'&&<path class="buff-line" d="M25 60V10H75" />}
-    {type==='clue'&&<text class="buff-clue" x="100" y="40">2</text>}
-    {type==='shield'&&<><path class="wrong-line" d="M125 60H175"/><path class="correct-cross" d="M144 54L156 66M156 54L144 66"/></>}
-   </svg></div>
-   <div class="buff-copy"><p class="buff-name">{name}</p><h4>{title}</h4><p>{description}</p></div>
-  </article>)}</div>
-  <div class="replay"><div><span class="eyebrow">DAILY CHALLENGE</span><h3>{ja ? '今日も、ひとつ先の挑戦へ。' : 'A fresh reason to return.'}</h3></div><p>{ja ? '毎日更新されるデイリーチャレンジ。タイムランキングで、世界中のプレイヤーと記録を競う楽しさも。' : 'Take on a daily challenge and compete for times with players around the world on the rankings.'}</p></div>
+  <div class="adventure-intro-layout">
+   <div class="story-heading">
+    <p class="eyebrow">SLITHERLINK × ROGUELIKE</p>
+    <p class="adventure-mode-name">{ja ? 'アドベンチャーモード' : 'ADVENTURE MODE'}</p>
+    <h2 id="adventure-title">{ja ? '選んで、重ねて、' : 'Draft your buffs.'}<br/><span>{ja ? '最速へ。' : 'Build your fastest run.'}</span></h2>
+    <p>{ja ? 'ランダムに現れる3つのバフから、ひとつを選ぶ。効果を組み合わせながら全4ステージに挑み、合計クリアタイムを競う。スリザーリンクに、ローグライクのような選択と成長を。' : 'Choose one of three random buffs before each stage. Combine their effects across a four-stage run and compete for the fastest total clear time. Slitherlink logic meets roguelike choices and progression.'}</p>
+    <ul class="adventure-facts"><li><strong>3</strong><span>{ja ? '択から選ぶ' : 'random choices'}</span></li><li><strong>4</strong><span>{ja ? 'ステージを走り抜く' : 'stages per run'}</span></li><li><strong>1</strong><span>{ja ? 'つの合計タイムで競う' : 'total time to beat'}</span></li></ul>
+   </div>
+   <AdventureMedia ja={ja} />
+  </div>
+  <div class="adventure-decisions-heading"><p class="eyebrow">EVERY PICK MATTERS</p><h3>{ja ? '解く力と、引き運と、あなたの判断。' : 'Logic. Luck. And the choices you make.'}</h3><p>{ja ? '後半ほど、高いティアのバフが出やすくなる。次に何が来るかは、選んできたバフによっても変わります。' : 'Higher-tier buffs become more likely in later stages. What you have already picked also shapes which buffs can appear next.'}</p></div>
+  <div class="adventure-decisions">{decisions.map(([label,title,description])=><article><p class="decision-label">{label}</p><h4>{title}</h4><p>{description}</p></article>)}</div>
+  <div class="replay"><div><p class="eyebrow">DAILY CHALLENGE / MONTHLY RANKING</p><h3>{ja ? '今日の挑戦で、今月のベストを。' : 'A daily chance at your best run.'}</h3></div><div><p>{ja ? '1回のランの合計クリアタイムで、世界中のプレイヤーと月間ランキングを競う。次の挑戦では、また違うバフの組み合わせで記録更新を目指そう。' : 'Compete with players worldwide on the monthly leaderboard, based on your total clear time for a run. Try a different combination of buffs on your next attempt and chase a new best.'}</p><p class="adventure-availability">{ja ? 'デイリーは通常1日1回。追加挑戦は100 SP。Legendプランでは1日5回に加え、ランキング対象外のトレーニングも利用できます。' : 'One daily attempt as standard; additional attempts cost 100 SP. The Legend plan includes five daily attempts and training that does not submit leaderboard scores.'}</p></div></div>
  </div>
 </section>
