@@ -15,7 +15,7 @@ Public claims were checked against the official Apple and Google store listings 
 - https://apps.apple.com/jp/app/loop-logic/id6758883537
 - https://play.google.com/store/apps/details?id=ch.overpatch.looplogic
 
-The existing app icon is from the Loop Logic app repository. The three JPEGs are current Japanese App Store marketing images fetched through Apple's lookup API, updated to 1242×2688 on 2026-09-12. Replace them with approved current screenshots when the store artwork is refreshed. The hero is an interactive website practice puzzle, not a product screenshot. English currently uses the same Japanese store imagery and labels that limitation in the page.
+The existing app icon is from the Loop Logic app repository. The three JPEGs are current Japanese App Store marketing images fetched through Apple's lookup API, updated to 1242×2688 on 2026-09-12. Replace them with approved current screenshots when the store artwork is refreshed. The hero displays the phone portions of the existing store images using CSS; clicking opens the complete, unmodified artwork. The optional practice puzzle lives under How to play. English currently uses the same Japanese store imagery and labels that limitation in the page.
 
 Shared content: `src/components/Home.astro`. Shared styling: `src/styles/global.css`.
 Both store destinations are explicit; there is no automatic platform or language redirect.
@@ -37,6 +37,13 @@ The original GitHub Pages site and app/store links are unchanged. After the prod
 - Shared StoreLinks uses official black store badges with equal visual height; copy applies to phones and tablets. Google Play uses the official English badge on both locales because the legacy Japanese asset endpoints are unavailable. Apple badges are localized.
 - Badge sources: https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg ; https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp ; https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png . Artwork is preserved without modification.
 - The hero's direct practice link starts the optional puzzle. The existing pause, reset, hints and two puzzles are preserved.
-- Adventure introduction consolidates the repeated bridge and journey explanation. Store badges appear once in the final download section; the sticky header provides access from anywhere on the page.
+- Adventure introduction consolidates the repeated bridge and journey explanation. Store badges appear in both the hero and final download section; the sticky header provides access from anywhere on the page.
 - Store screenshots open a native dialog, support Escape, restore focus and remain ordinary image links without JavaScript. Mobile screenshots use horizontal scroll snap.
 - Global and Adventure styles are consolidated; practice edge targets have a 44px minimum short side. The main page was checked at 320, 390, 768 and 1280px widths across both locales.
+
+## App-first redesign (2026-09-13)
+
+- Japanese and English home pages lead with explicit iOS/Android app positioning, store badges, and two gameplay screens. Existing store artwork is displayed through CSS cropping; the original files are unchanged and can be enlarged.
+- Standard and Adventure modes are presented together near the top, each with gameplay imagery. Adventure introduces buffs in plain language alongside the actual store selection screen.
+- Detailed buff combinations, the four-stage example, and challenge limits remain available in a native disclosure. The repeated three-step tutorial is replaced by one diagram and an optional playable demo, preserving both puzzles, hints, pause, reset, and direct `#try-puzzle` links.
+- Presentation changes are scoped to `src/styles/home.css`. Legal documents, store destinations, and language selection are preserved. English identifies the Japanese screenshot language.

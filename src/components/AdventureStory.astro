@@ -1,5 +1,6 @@
 ---
 import AdventureMedia from './AdventureMedia.astro';
+import AppScreen from './AppScreen.astro';
 const { ja } = Astro.props;
 const decisions = ja ? [
  ['01 / BUILD', '今の助けを、次の強さへ。', '獲得したバフは次のステージへ持ち越し。正解線スタートを取ると、その上位版が候補に加わります。別の効果を足すか、今の強みを伸ばすか。'],
@@ -11,20 +12,15 @@ const decisions = ja ? [
  ['03 / TRADE-OFF', 'Give up your build to skip a stage?', 'With Buff Reroll Increase, Stage Skip can appear in stages 2 and 3. It lets you skip a stage, but costs you every buff you have collected so far.'],
 ];
 ---
-<section id="adventure" class="adventure-story section" aria-labelledby="adventure-title">
+<section id="adventure" class="app-adventure section" aria-labelledby="adventure-title">
  <div class="wrap">
-  <div class="adventure-intro-layout">
-   <div class="story-heading">
-    <p class="eyebrow">SLITHERLINK × ROGUELIKE</p>
-    <p class="adventure-mode-name">{ja ? 'アドベンチャーモード' : 'ADVENTURE MODE'}</p>
-    <h2 id="adventure-title">{ja ? '選んで、重ねて、' : 'Draft your buffs.'}<br/><span>{ja ? '最速へ。' : 'Build your fastest run.'}</span></h2>
-    <p>{ja ? 'ランダムに現れる3つのバフから、ひとつを選ぶ。効果を組み合わせながら全4ステージに挑み、合計クリアタイムを競う。スリザーリンクに、ローグライクのような選択と成長を。' : 'Choose one of three random buffs before each stage. Combine their effects across a four-stage run and compete for the fastest total clear time. Slitherlink logic meets roguelike choices and progression.'}</p>
-    <ul class="adventure-facts"><li><strong>3</strong><span>{ja ? '択から選ぶ' : 'random choices'}</span></li><li><strong>4</strong><span>{ja ? 'ステージを走り抜く' : 'stages per run'}</span></li><li><strong>1</strong><span>{ja ? 'つの合計タイムで競う' : 'total time to beat'}</span></li></ul>
+  <div class="adventure-feature">
+   <div class="adventure-feature-copy"><p class="eyebrow">{ja ? 'パズルに、選ぶ楽しさを' : 'A LITTLE STRATEGY. A NEW CHALLENGE.'}</p><h2 id="adventure-title">{ja ? 'どの強化で、' : 'Which upgrade'}<br/><span>{ja ? '次に挑む？' : 'will you choose?'}</span></h2><p>{ja ? 'ヒントを増やす？ ミスを防ぐ？ 3つの候補から、パズルを助ける「バフ」をひとつ選択。選んだ効果を重ねながら、全4ステージを解き進めます。' : 'More hints? Protection from mistakes? Choose one of three buffs to help with your puzzle, then combine their effects across four stages.'}</p>
+    <ol class="adventure-flow"><li><span>01</span>{ja ? '強化を選ぶ' : 'Pick an upgrade'}</li><li><span>02</span>{ja ? 'パズルを解く' : 'Solve the puzzle'}</li><li><span>03</span>{ja ? '次のステージへ' : 'Take it to the next stage'}</li></ol>
+    <p class="challenge-note">{ja ? 'デイリーチャレンジでは、合計タイムで月間ランキングに挑戦。' : 'Take on the daily challenge and compete for the best total time on the monthly leaderboard.'}</p>
    </div>
-   <AdventureMedia ja={ja} />
+   <figure class="buff-screen"><AppScreen src="/images/buffs.jpg" alt={ja ? '3つの強化から選ぶ、アプリのバフ選択画面' : 'The app’s buff selection screen with three upgrades'} ja={ja}/><figcaption>{ja ? 'アプリの強化選択画面' : 'Buff selection · Japanese screen shown'}</figcaption></figure>
   </div>
-  <div class="adventure-decisions-heading"><p class="eyebrow">EVERY PICK MATTERS</p><h3>{ja ? '解く力と、引き運と、あなたの判断。' : 'Logic. Luck. And the choices you make.'}</h3><p>{ja ? '後半ほど、高いティアのバフが出やすくなる。次に何が来るかは、選んできたバフによっても変わります。' : 'Higher-tier buffs become more likely in later stages. What you have already picked also shapes which buffs can appear next.'}</p></div>
-  <div class="adventure-decisions">{decisions.map(([label,title,description])=><article><p class="decision-label">{label}</p><h4>{title}</h4><p>{description}</p></article>)}</div>
-  <div class="replay"><div><p class="eyebrow">DAILY CHALLENGE / MONTHLY RANKING</p><h3>{ja ? '今日の挑戦で、今月のベストを。' : 'A daily chance at your best run.'}</h3></div><div><p>{ja ? '1回のランの合計クリアタイムで、世界中のプレイヤーと月間ランキングを競う。次の挑戦では、また違うバフの組み合わせで記録更新を目指そう。' : 'Compete with players worldwide on the monthly leaderboard, based on your total clear time for a run. Try a different combination of buffs on your next attempt and chase a new best.'}</p><p class="adventure-availability">{ja ? 'デイリーは通常1日1回。追加挑戦は100 SP。Legendプランでは1日5回に加え、ランキング対象外のトレーニングも利用できます。' : 'One daily attempt as standard; additional attempts cost 100 SP. The Legend plan includes five daily attempts and training that does not submit leaderboard scores.'}</p></div></div>
+  <details class="adventure-details"><summary>{ja ? 'バフの組み合わせと挑戦ルールを詳しく見る' : 'Explore buff combinations and challenge rules'}<span aria-hidden="true">＋</span></summary><div class="adventure-details-content"><AdventureMedia ja={ja}/><div class="adventure-decisions">{decisions.map(([label,title,description])=><article><h4>{title}</h4><p>{description}</p></article>)}</div><p class="detail-availability">{ja ? '後半ほど高いティアのバフが出やすくなります。デイリーは通常1日1回。追加挑戦は100 SP。Legendプランでは1日5回に加え、ランキング対象外のトレーニングも利用できます。' : 'Higher-tier buffs become more likely in later stages. One daily attempt as standard; additional attempts cost 100 SP. The Legend plan includes five daily attempts and unranked training.'}</p></div></details>
  </div>
 </section>

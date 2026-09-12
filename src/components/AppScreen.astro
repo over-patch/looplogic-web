@@ -1,0 +1,7 @@
+---
+interface Props { src: string; alt: string; ja: boolean; eager?: boolean; }
+const { src, alt, ja, eager = false } = Astro.props;
+---
+<a class="app-screen" href={src} data-screenshot aria-label={`${alt} — ${ja ? '拡大する' : 'Enlarge'}`}>
+ <img src={src} width="1242" height="2688" alt={alt} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} />
+</a>

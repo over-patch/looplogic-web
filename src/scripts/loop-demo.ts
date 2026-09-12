@@ -82,7 +82,7 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(root=>{
  };
  next.addEventListener('click',()=>{
   if(mode==='watch'){invite(0);return;}
-  if(mode==='done'){if(round===0)invite(1);else document.querySelector('#adventure')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}
+  if(mode==='done'){if(round===0)invite(1);else document.querySelector('#download')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}
   const wrong=[...placed].find(e=>!challenges[round].solution.includes(e));
   buttons.forEach(b=>b.classList.remove('is-target'));
   const suggested=wrong??challenges[round].solution.find(e=>!placed.has(e));
@@ -101,7 +101,7 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(root=>{
   if(solved(placed,challenges[round].clues)){
    mode='done';draw();celebrate();progress.textContent=choose('できた！すべてが、つながった。','You did it! Everything connects.');
    instruction.textContent=round===0?choose('もう一問、やってみる？','Ready for one more?'):choose('アプリでは、この先にアドベンチャーも。','There’s more to discover in Adventure Mode.');
-   next.textContent=round===0?choose('次の一問を見る','See the next puzzle'):choose('アドベンチャーを見る','Discover Adventure');reset.textContent=choose('説明をもう一度','Watch again');next.focus({preventScroll:true});return;
+   next.textContent=round===0?choose('次の一問を見る','See the next puzzle'):choose('アプリで続きを遊ぶ','Get the app');reset.textContent=choose('説明をもう一度','Watch again');next.focus({preventScroll:true});return;
   }
   draw();
   const status=feedback(placed,challenges[round].clues);
