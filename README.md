@@ -26,9 +26,23 @@ The root selects the saved manual choice first, then the first supported browser
 
 ## Publication
 
-The `.openai/hosting.json` manifest identifies the private Sites review deployment. The production canonical URLs intentionally target the planned domain, not the review origin. The custom production domain and DNS have not been activated by this change. Existing GitHub origin remains unchanged. `dist/` is a static build suitable for GitHub Pages as well as Sites.
+Production uses GitHub Pages at https://looplogic.overpatch.dev/. The `.openai/hosting.json` manifest continues to identify the separate private Sites review deployment.
 
-Legal pages live at `/privacy/`, `/terms/`, `/ja/privacy/`, and `/ja/terms/`, following Owlaria's locale convention. Home-page footer links use these local routes.
+Pull requests run `.github/workflows/ci.yml`: install the locked dependencies, run the existing puzzle tests, and build the static Astro site. After CI passes, merge the PR into `main`. Every push to `main` runs `.github/workflows/deploy.yml`, which repeats the tests and build, uploads only `dist/`, and deploys through GitHub's built-in Pages/OIDC permissions without repository secrets. Manual deployment is available from Actions on `main` only. Branch pushes and PRs do not update production; failed builds leave the existing deployment in place.
+
+Repository Settings → Pages must use **GitHub Actions** as the source, `looplogic.overpatch.dev` as the custom domain, and **Enforce HTTPS** once the certificate is ready. Pages must be available under the repository's visibility and GitHub plan. `public/CNAME` is copied into the build and records the intended domain; repository settings and DNS must also be configured.
+
+In Porkbun, keep this DNS record (replace any conflicting record for the same host):
+
+```text
+Type:  CNAME
+Host:  looplogic
+Value: over-patch.github.io
+```
+
+Do not add A/AAAA records for this subdomain. After deployment, verify HTTPS, `/`, `/en/`, `/ja/`, the localized legal pages, `/robots.txt`, `/sitemap.xml`, and a nonexistent URL returning 404. Confirm canonical/hreflang URLs use the production domain. To roll back, revert the relevant change through a PR, pass CI, and merge into `main`.
+
+Canonical legal pages live at `/en/privacy/`, `/en/terms/`, `/ja/privacy/`, and `/ja/terms/`. `/privacy/` and `/terms/` remain English aliases. Home-page footer links use the localized routes.
 
 The four original HTML documents in `src/data/legal/` are byte-for-byte copies from https://github.com/over-patch/overpatch-legal/tree/0ee155d7e088af5f2ee7c6bb955fae95ca1d0910/looplogic (imported 2026-09-12). `LegalPage.astro` renders the original document from its first heading through its footer, preserving all policy wording, dates, and contact details. Only the surrounding site navigation and presentation change; privacy heading levels are normalized without changing their text. Language switches stay on the same document.
 
