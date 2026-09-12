@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 
 
 interface Props {
@@ -10,7 +11,6 @@ interface Props {
 const { lang, kind, source } = Astro.props;
 const ja = lang === 'ja';
 const home = ja ? '/ja/' : '/en/';
-const alternatePath = `${ja ? '/en/' : '/ja/'}${kind}/`;
 const origin = 'https://looplogic.overpatch.dev';
 const canonical = `${origin}${home}${kind}/`;
 const title = source.match(/<title>([\s\S]*?)<\/title>/)?.[1];
@@ -44,11 +44,10 @@ const content = kind === 'privacy'
       <div class="header wrap">
         <a class="brand" href={home}><img src="/images/icon.png" width="40" height="40" alt="" /><span>Loop Logic</span></a>
         <div class="header-actions">
-          <a class="language" href={alternatePath} lang={ja ? 'en' : 'ja'} data-language-choice={ja ? 'en' : 'ja'}>{ja ? 'EN' : '日本語'}</a>
+          <LanguageSwitcher lang={lang} page={kind} />
         </div>
       </div>
     </header>
-    <script>import '../scripts/language-choice';</script>
     <main id="main" class="legal wrap">
       <article set:html={content} />
     </main>

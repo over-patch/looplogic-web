@@ -6,6 +6,7 @@ import AdventureStory from './AdventureStory.astro';
 import FirstLoop from './FirstLoop.astro';
 import AppScreen from './AppScreen.astro';
 import StoreLinks from './StoreLinks.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 import languageEntry from '../scripts/language-entry.js?raw';
 const { lang = 'ja', autoDetect = false } = Astro.props;
 const ja = lang === 'ja';
@@ -34,9 +35,8 @@ const legal = ja ? '/ja/' : '/en/';
   <header class="site-header"><div class="header wrap">
    <a class="brand" href={ja ? '/ja/' : '/en/'} aria-label="Loop Logic"><img src="/images/icon.png" width="40" height="40" alt="" /><span>Loop Logic</span></a>
    <nav aria-label={ja ? 'メインナビゲーション' : 'Main navigation'}><a href="#how">{ja ? '遊び方' : 'How to play'}</a><a href="#adventure">{ja ? 'アドベンチャー' : 'Adventure'}</a></nav>
-   <div class="header-actions"><a class="language" href={ja ? '/en/' : '/ja/'} lang={ja ? 'en' : 'ja'} data-language-choice={ja ? 'en' : 'ja'}>{ja ? 'EN' : '日本語'}</a><a class="small-cta" href="#download">{ja ? 'ダウンロード' : 'Download'}</a></div>
+   <div class="header-actions"><LanguageSwitcher lang={lang} /><a class="small-cta" href="#download">{ja ? 'ダウンロード' : 'Download'}</a></div>
   </div></header>
-  <script>import '../scripts/language-choice';</script>
   <main id="main" class="app-home">
    <section class="app-hero wrap" aria-labelledby="hero-title">
     <div class="app-hero-copy">

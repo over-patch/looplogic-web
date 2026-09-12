@@ -1,0 +1,55 @@
+---
+interface Props {
+  lang: 'en' | 'ja';
+  page?: '' | 'privacy' | 'terms';
+}
+const { lang, page = '' } = Astro.props;
+const languages = [
+  { code: 'en', label: 'English', path: '/en/' },
+  { code: 'ja', label: '日本語', path: '/ja/' },
+];
+const label = lang === 'ja' ? '言語' : 'Language';
+---
+<details class="language-switcher" data-language-switcher>
+  <summary aria-label={lang === 'ja' ? '表示言語を選択' : 'Choose language'}>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><path d="M3 12h18" /></svg>
+    <span class="language-label">{label}</span>
+    <svg class="language-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m3 4.5 3 3 3-3" /></svg>
+  </summary>
+  <ul aria-label={label}>
+    {languages.map(language => <li><a href={`${language.path}${page ? `${page}/` : ''}`} lang={language.code} hreflang={language.code} data-language-choice={language.code} aria-current={language.code === lang ? 'page' : undefined}>
+      <span>{language.label}</span>
+      {language.code === lang && <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m3 8 3 3 7-7" /></svg>}
+    </a></li>)}
+  </ul>
+</details>
+
+<script>
+  import '../scripts/language-choice';
+  document.querySelectorAll<HTMLDetailsElement>('[data-language-switcher]').forEach(switcher => {
+    switcher.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && switcher.open) {
+        switcher.open = false;
+        switcher.querySelector('summary')?.focus();
+      }
+    });
+    document.addEventListener('click', event => {
+      if (event.target instanceof Node && !switcher.contains(event.target)) switcher.open = false;
+    });
+    switcher.addEventListener('focusout', event => {
+      if (event.relatedTarget instanceof Node && !switcher.contains(event.relatedTarget)) switcher.open = false;
+    });
+  });
+</script>
+
+<style>
+  .language-switcher { position: relative; flex-shrink: 0; font-size: .875rem; color: #b7bfd2; }
+  summary { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 10px; border-radius: 8px; cursor: pointer; list-style: none; white-space: nowrap; }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover, details[open] summary { background: #ffffff0c; color: var(--text); }
+  details[open] .language-chevron { transform: rotate(180deg); }
+  ul { position: absolute; right: 0; top: calc(100% + 8px); width: 176px; max-width: calc(100vw - 32px); margin: 0; padding: 6px; list-style: none; border: 1px solid #ffffff26; border-radius: 12px; background: #151827; box-shadow: 0 12px 32px #0006; }
+  a { display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 10px 12px; border-radius: 6px; color: var(--text); }
+  a:hover, a[aria-current] { background: #ffffff0c; color: var(--accent); }
+  @media (max-width: 480px) { .language-label { display: none; } summary { gap: 5px; padding-inline: 8px; } }
+</style>

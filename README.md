@@ -53,3 +53,5 @@ The original GitHub Pages site and app/store links are unchanged. After the prod
 ## Phone handoff
 
 Desktop download sections (900px and wider) include separate App Store and Google Play QR codes in `public/images/qr/`. They encode the same direct store URLs as the badges, with Japanese/US App Store destinations selected by page language. They never point to the private review site. Mobile retains the store badges without QR codes. Regenerate with `scripts/generate-store-qr.py` using Python `qrcode==8.2`; generated SVG files are committed, so the app has no QR runtime dependency.
+
+The shared `LanguageSwitcher.astro` shows a globe and localized Language label (icon-only on small screens). Its expandable list uses each language’s native name and marks the current language. Add menu options in its `languages` array alongside the corresponding localized routes and entry-point detection support. It preserves the current legal page, query, anchor, and remembered manual choice. Native details and links remain usable without JavaScript.
